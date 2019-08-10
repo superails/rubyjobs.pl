@@ -162,12 +162,75 @@ ALTER SEQUENCE public.jobs_id_seq OWNED BY public.jobs.id;
 
 
 --
+-- Name: locations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.locations (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.locations_id_seq OWNED BY public.locations.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: sites; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sites (
+    id bigint NOT NULL,
+    job_id bigint,
+    location_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sites_id_seq OWNED BY public.sites.id;
 
 
 --
@@ -196,6 +259,20 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 --
 
 ALTER TABLE ONLY public.jobs ALTER COLUMN id SET DEFAULT nextval('public.jobs_id_seq'::regclass);
+
+
+--
+-- Name: locations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.locations ALTER COLUMN id SET DEFAULT nextval('public.locations_id_seq'::regclass);
+
+
+--
+-- Name: sites id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites ALTER COLUMN id SET DEFAULT nextval('public.sites_id_seq'::regclass);
 
 
 --
@@ -239,11 +316,27 @@ ALTER TABLE ONLY public.jobs
 
 
 --
+-- Name: locations locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.locations
+    ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: sites sites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites
+    ADD CONSTRAINT sites_pkey PRIMARY KEY (id);
 
 
 --
@@ -275,6 +368,36 @@ CREATE INDEX index_jobs_on_company_id ON public.jobs USING btree (company_id);
 
 
 --
+-- Name: index_sites_on_job_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sites_on_job_id ON public.sites USING btree (job_id);
+
+
+--
+-- Name: index_sites_on_location_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sites_on_location_id ON public.sites USING btree (location_id);
+
+
+--
+-- Name: sites fk_rails_898c38bf0b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites
+    ADD CONSTRAINT fk_rails_898c38bf0b FOREIGN KEY (job_id) REFERENCES public.jobs(id);
+
+
+--
+-- Name: sites fk_rails_a845cb9250; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites
+    ADD CONSTRAINT fk_rails_a845cb9250 FOREIGN KEY (location_id) REFERENCES public.locations(id);
+
+
+--
 -- Name: jobs fk_rails_b34da78090; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -300,6 +423,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190809195300'),
 ('20190810104649'),
 ('20190810104732'),
-('20190810111156');
+('20190810111156'),
+('20190810115044'),
+('20190810120200');
 
 
