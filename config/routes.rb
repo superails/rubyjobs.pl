@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  get 'jobs/index'
-  get 'jobs/new'
-  resources :jobs, only: [:index, :new]
   root to: 'jobs#index'
+
+  resources :jobs, only: [:index, :new, :create]
+
+  resource :jobs do
+    resource :preview, only: [:show]
+  end
 end

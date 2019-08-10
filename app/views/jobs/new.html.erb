@@ -3,4 +3,17 @@ Informacje o firmie
 
 <%= form_with model: @job do |form| %>
   <%= form.text_field :title %>
+  <%= form.text_field :location %>
+  <%= form.check_box :remote %>
+  <%= form.text_field :salary %>
+  <%= form.select :salary_type, options_for_select(["B2B", "Umowa o pracę", "Umowa o dzieło"]) %>
+  <%= form.text_area :description %>
+  <%= form.text_field :apply_link %>
+  <%= form.fields_for :company do |company_fields| %>
+    <%= company_fields.text_field :name %>
+    <%= company_fields.file_field :logo %>
+  <% end %>
+  <%= form.text_field :email %>
+
+  <%= form.submit "Dalej" %>
 <% end %>
