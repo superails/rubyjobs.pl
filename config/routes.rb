@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
   resource :jobs do
     resource :preview, only: [:show]
+    resource :summary, only: [:show]
   end
 end

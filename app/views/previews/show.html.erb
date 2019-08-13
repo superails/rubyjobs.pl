@@ -4,7 +4,10 @@ Strona główna
 <%= @job.title %>
 <%= @job.salary %>
 <%= @job.salary_type %>
+<%= @job.location_names %>
 
 Treść ogłoszenia
 
 <%= @job.description %>
+
+<%= link_to "Dalej", jobs_summary_path %>  
