@@ -1,1 +1,8 @@
 <%= link_to "Dodaj ogłoszenie", new_job_path %>
+<% @jobs.each do |job| %>
+  <%= job.company.name %>
+  <%= job.title %>
+  <%= job.location_names %>
+  <%= job.salary %>
+  <%= job.salary_type %>
+<% end %>

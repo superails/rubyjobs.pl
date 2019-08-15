@@ -138,7 +138,8 @@ CREATE TABLE public.jobs (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     company_id bigint,
-    email character varying
+    email character varying,
+    published_at timestamp without time zone
 );
 
 
@@ -425,6 +426,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190810104732'),
 ('20190810111156'),
 ('20190810115044'),
-('20190810120200');
+('20190810120200'),
+('20190815190848');
 
 

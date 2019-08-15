@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resource :jobs do
     resource :preview, only: [:show]
     resource :summary, only: [:show]
+    resource :publication, only: [:create]
   end
 end
