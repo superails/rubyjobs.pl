@@ -1,6 +1,6 @@
 class SummariesController < ApplicationController
   def show
-    @job = Job.find(session[:job_id])
+    @job = Job.find(session[:job_id]).decorate
   end
 end
 

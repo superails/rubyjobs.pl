@@ -27,10 +27,6 @@ class Job < ApplicationRecord
     self.locations << existing_locations + new_locations
   end
 
-  def location_names
-    locations.pluck(:name).join(', ')
-  end
-
   def expiration_time
     (created_at + 30.days).strftime("%d.%m.%Y")
   end
