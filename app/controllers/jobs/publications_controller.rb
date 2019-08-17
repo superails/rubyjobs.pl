@@ -1,4 +1,4 @@
-class PublicationsController < ApplicationController
+class Jobs::PublicationsController < ApplicationController
   def create
     job = Job.find(session[:job_id])
 
