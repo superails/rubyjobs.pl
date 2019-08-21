@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   resources :jobs, only: [:index, :new, :create]
 
-  resource :jobs
   namespace :jobs do 
     resource :preview, only: [:show]
     resource :summary, only: [:show]

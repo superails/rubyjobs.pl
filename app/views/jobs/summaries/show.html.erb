@@ -1,12 +1,38 @@
-<%= @job.company.name %>
-<%= @job.title %>
-<%= @job.salary %>
-<%= @job.salary_type %>
-<%= @job.location_names %>
+<div class="container m-auto max-w-3xl px-4 pt-8 pb-4">
+  <h1 class="text-4xl font-bold text-red-800 font-serif mb-10 text-center">RubyJobs.pl</h1>
+  <div class="flex justify-between">
+    <div class="flex-1 text-center">
+      <p class="border-b-4 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 1</p>
+      <p class="text-2xl text-gray-700">Dodaj ogłoszenie</p>
+    </div>
+    <div class="flex-1 text-center">
+      <p class="border-b-4 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 2</p>
+      <p class="text-2xl text-gray-700">Podgląd ogłoszenia</p>
+    </div>
+    <div class="flex-1 text-center">
+      <p class="border-b-4 border-red-600 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 3</p>
+      <p class="text-2xl text-gray-700 font-sans">Podsumowanie</p>
+    </div>
+  </div>
+</div>
 
-Informacje dodatkowe
+<div class="container m-auto max-w-3xl px-4 mt-6">
+  <%= render partial: 'jobs/job', locals: {job: @job} %>
+</div>
 
-Ogłoszenie będzie aktywne do <%= @job.expiration_time %>
-Informacje o zakończeniu wyświetlania ogłoszenia otrzymasz na adres: marcin@rubyjobs.pl
+<div class="container m-auto max-w-3xl px-4 mt-6">
+  <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Informacje dodatkowe</h2>
+  <div class="mb-8">
+    <ul class="list-disc">
+      <li class="ml-4">Ogłoszenie będzie aktywne do <%= @job.expiration_time %></li>
+      <li class="ml-4">Informacje o zakończeniu wyświetlania ogłoszenia otrzymasz na adres: <%= @job.email %></li>
+    </ul>
+  </div>
 
-<%= link_to "Publikuj", jobs_publication_path, method: :post %>
+  <div class="flex justify-between border-t pt-8">
+    <button class="text-red-600 py-4 text-xl font-bold">Wstecz</button>
+    <%= link_to "Publikuj", jobs_publication_path, method: :post, class: "bg-red-600 text-white px-8 py-4 text-xl font-bold rounded" %>
+  </div>
+</div>
+
+

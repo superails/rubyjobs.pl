@@ -1,8 +1,11 @@
-<%= link_to "Dodaj ogłoszenie", new_job_path %>
-<% @jobs.each do |job| %>
-  <%= job.company.name %>
-  <%= job.title %>
-  <%= job.location_names %>
-  <%= job.salary %>
-  <%= job.salary_type %>
-<% end %>
+<div class="pb-10 mt-8 px-4 mb-10">
+  <div class="container mx-auto text-center">
+    <h1 class="text-5xl font-bold text-red-800 font-serif">RubyJobs.pl</h1>
+    <h2 class="text-xl mb-10 text-gray-800">Ogłoszenia pracy dla programistów Rubiego</h2>
+    <%= link_to "Dodaj ogłoszenie", new_job_path, class: "bg-red-600 text-white font-bold px-6 py-3 inline-block rounded" %>
+  </div>
+</div>
+
+<div class="container m-auto max-w-3xl px-4">
+  <%= render @jobs %>
+</div>

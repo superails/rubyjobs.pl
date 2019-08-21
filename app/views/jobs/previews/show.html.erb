@@ -1,13 +1,40 @@
-Strona główna
+<div class="container m-auto max-w-3xl px-4 pt-8 pb-4">
+  <h1 class="text-4xl font-bold text-red-800 font-serif mb-10 text-center">RubyJobs.pl</h1>
+  <div class="flex justify-between">
+    <div class="flex-1 text-center">
+      <p class="border-b-4 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 1</p>
+      <p class="text-2xl text-gray-700">Dodaj ogłoszenie</p>
+    </div>
+    <div class="flex-1 text-center">
+      <p class="border-b-4 border-red-600 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 2</p>
+      <p class="text-2xl text-gray-700">Podgląd ogłoszenia</p>
+    </div>
+    <div class="flex-1 text-center">
+      <p class="border-b-4 text-red-600 font-bold pb-3 mb-3 text-xl">Krok 3</p>
+      <p class="text-2xl text-gray-700 font-sans">Podsumowanie</p>
+    </div>
+  </div>
+</div>
 
-<%= @job.company.name %>
-<%= @job.title %>
-<%= @job.salary %>
-<%= @job.salary_type %>
-<%= @job.location_names %>
-
-Treść ogłoszenia
-
-<%= @job.description %>
-
-<%= link_to "Dalej", jobs_summary_path %>  
+<div class="container m-auto max-w-3xl px-4 mt-6">
+  <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Strona główna</h2>
+  <%= render partial: 'jobs/job', locals: {job: @job} %>
+</div>
+<div class="container m-auto max-w-3xl px-4 pt-4 pb-10">
+  <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Treść ogłoszenia</h2>
+  <div class="border-b pb-5">
+    <p class="text-gray-800 text-xl mb-2"><%= @job.company.name %></p>
+    <p class="text-2xl font-bold"><%= @job.title %></p>
+    <p class="text-gray-800 mb-2"><%= @job.location_names %></p>
+    <p class="text-gray-800"><%= @job.salary %> (<%= @job.salary_type %>)</p>
+  </div>
+  <div class="mt-5 pb-6 leading-relaxed text-gray-800 mb-6">
+    <div class="trix-content" ng-bind-html="$ctrl.offer.body">
+      <%= @job.description %>
+    </div>
+  </div>
+  <div class="flex justify-between border-t pt-8">
+    <button class="text-red-600 py-4 text-xl font-bold">Wstecz</button>
+    <%= link_to "Dalej", jobs_summary_path, class: "bg-red-600 text-white px-5 py-4 text-xl font-bold rounded" %>
+  </div>
+</div>
