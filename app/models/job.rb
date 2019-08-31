@@ -12,19 +12,11 @@ class Job < ApplicationRecord
       {name: location_name}
     end
 
-    locations.build(location_params)
+    self.locations = location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
   end
 
   def remote=(value)
-    locations.build([name: 'Zdalnie'])
-  end
-
-  def autosave_associated_records_for_locations
-    new_locations = locations.reject{|location| Location.find_by(name: location.name)}
-    existing_locations = Location.where(name: (locations - new_locations).map(&:name))
-
-    new_locations.each(&:save!)
-    self.locations << existing_locations + new_locations
+    locations.build([name: 'Zdalnie']) if value == "1"
   end
 
   def expiration_time
