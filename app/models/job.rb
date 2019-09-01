@@ -7,6 +7,8 @@ class Job < ApplicationRecord
 
   attr_reader :location, :remote
 
+  scope :published, -> { where.not(published_at: nil) }
+
   def location=(location)
     location_params = location.split(/\s*,\s*/).map do |location_name|
       {name: location_name}

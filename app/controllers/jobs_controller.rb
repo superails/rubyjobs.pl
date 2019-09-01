@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   def index
-    @jobs = Job.all.includes(:locations, :company).decorate
+    @jobs = Job.published.includes(:locations, :company).decorate
   end
 
   def new

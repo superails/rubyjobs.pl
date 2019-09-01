@@ -44,7 +44,10 @@ group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'timecop'
   gem 'factory_bot_rails'
+end
 
+group :test do 
+  gem 'rails-controller-testing'
 end
 
 group :development do
