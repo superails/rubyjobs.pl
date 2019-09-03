@@ -13,7 +13,9 @@
 
   <body>
     <% if flash[:notice] %>
-      <%= flash[:notice] %>
+      <div class="bg-red-500 p-4 text-center text-white font-bold">
+        <%= flash[:notice] %>
+      </div>
     <% end %>
 
     <%= yield %>
