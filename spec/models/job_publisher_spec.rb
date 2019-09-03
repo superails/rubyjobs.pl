@@ -11,7 +11,7 @@ RSpec.describe JobPublisher, type: :model do
       expect(job.reload.published_at).to_not be_nil
     end
 
-    it "sends summary email to job's creator" do
+    it "sends summary email to user that created this job" do
       job = create(:job, email: 'marcin@rubyjobs.pl')
 
       JobPublisher.new(job).call

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Jobs", :type => :system do
+RSpec.describe "Job publication form", :type => :system do
   before do
     driven_by(:selenium_chrome_headless)
     Timecop.freeze('2019-01-01')
@@ -68,4 +68,6 @@ RSpec.describe "Jobs", :type => :system do
     expect(page).to have_text("B2B")
     expect(page).to have_text("Ogłoszenie zostało opublikowane, informacje zostały wysłane na adres marcin@rubyjobs.pl")
   end
+
+  it 'keeps information about job offer when moving back and forth'
 end
