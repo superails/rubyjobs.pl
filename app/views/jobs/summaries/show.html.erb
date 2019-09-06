@@ -30,7 +30,7 @@
   </div>
 
   <div class="flex justify-between border-t pt-8">
-    <button class="text-red-600 py-4 text-xl font-bold">Wstecz</button>
+    <%= link_to "Wstecz", jobs_preview_path, class: "text-red-600 py-4 text-xl font-bold" %>
     <%= link_to "Publikuj", jobs_publication_path, method: :post, class: "bg-red-600 text-white px-8 py-4 text-xl font-bold rounded" %>
   </div>
 </div>

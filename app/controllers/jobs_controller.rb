@@ -4,8 +4,17 @@ class JobsController < ApplicationController
   end
 
   def new
-    @job = Job.new
-    @job.build_company
+    if session[:job_id]
+      old_job = Job.find(session[:job_id])
+
+      @job = old_job.dup
+      @job.location = old_job.location 
+      @job.remote = old_job.remote
+      @job.company = old_job.company
+    else
+      @job = Job.new
+      @job.build_company
+    end
   end
 
   def create
