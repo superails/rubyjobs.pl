@@ -135,7 +135,7 @@ RSpec.describe "Job publication form", :type => :system do
       fill_in :job_location, with: "Warszawa, Białystok"
       check :job_remote
       fill_in :job_salary, with: "11000 - 18000"
-      select "B2B", from: :job_salary_type
+      select "Umowa o pracę", from: :job_salary_type
       fill_in :job_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
       fill_in :job_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
@@ -149,6 +149,7 @@ RSpec.describe "Job publication form", :type => :system do
       click_link "Wstecz"
 
       expect(page).to have_field('job_title', with: 'Ruby on Rails Developer')
+      expect(page).to have_select('job_salary_type', selected: 'Umowa o pracę')
 
       fill_in :job_title, with: "Senior Ruby on Rails Developer"
       uncheck :job_remote
