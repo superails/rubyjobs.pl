@@ -159,5 +159,4 @@ RSpec.describe "Job publication form", :type => :system do
       expect(page).to_not have_text('Zdalnie')
     end
   end
-
 end

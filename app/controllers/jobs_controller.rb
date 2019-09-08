@@ -3,6 +3,10 @@ class JobsController < ApplicationController
     @jobs = Job.published.includes(:locations, :company).decorate
   end
 
+  def show
+    @job = Job.find(params[:id]).decorate
+  end
+
   def new
     if session[:job_id]
       old_job = Job.find(session[:job_id])
