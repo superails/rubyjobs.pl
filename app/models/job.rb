@@ -24,7 +24,7 @@ class Job < ApplicationRecord
   end
 
   def remote=(value)
-    locations.build([name: 'Zdalnie']) if value == "1"
+    locations << Location.find_or_initialize_by(name: 'Zdalnie') if value == "1"
   end
 
   def expiration_time

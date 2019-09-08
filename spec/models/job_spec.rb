@@ -2,12 +2,27 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   describe "#remote=" do
-    it 'builds remote location when remote checkbox is checked' do
-      job = Job.new
+    context 'when remote location exists in database' do 
+      it 'assigns existing remote location when remote checkbox is checked' do
+        create(:location, name: 'Zdalnie')
+        job = Job.new
 
-      job.remote = "1"
+        job.remote = "1"
 
-      expect(job.locations.map(&:name)).to include('Zdalnie')
+        expect(job.locations.map(&:name)).to include('Zdalnie')
+        expect(job.locations.find{|location| location.name == 'Zdalnie'}.persisted?).to eq true
+      end
+    end
+
+    context 'when remote location does not exist in database' do
+      it 'builds new remote location when remote checkbox is checked' do
+        job = Job.new
+
+        job.remote = "1"
+
+        expect(job.locations.map(&:name)).to include('Zdalnie')
+        expect(job.locations.find{|location| location.name == 'Zdalnie'}.persisted?).to eq false
+      end
     end
 
     it 'does not build remote location when remote checkbox is unchecked' do
