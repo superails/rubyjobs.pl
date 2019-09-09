@@ -4,6 +4,8 @@ class Jobs::PublicationsController < ApplicationController
 
     JobPublisher.new(job).call
 
+    session.delete(:job_id)
+
     flash[:notice] = "Ogłoszenie zostało opublikowane, informacje zostały wysłane na adres #{job.email}"
     redirect_to root_path
   end
