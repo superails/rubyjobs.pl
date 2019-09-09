@@ -6,6 +6,8 @@ FactoryBot.define do
     description { "MyString" }
     apply_link { "MyString" }
     company
-    email { "MyString" }
+    email { "marcin@rubyjobs.pl" }
+    remote { "1" }
+    location { "Warszawa, Białystok" }
   end
 end

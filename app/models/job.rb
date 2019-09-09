@@ -7,6 +7,9 @@ class Job < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
+  validates :title, :locations, :salary, :apply_link, :email, presence: true
+  validates :email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
+
   def location
     locations.reject{|location| location.name == 'Zdalnie'}.map(&:name).join(', ')
   end
@@ -16,7 +19,7 @@ class Job < ApplicationRecord
       {name: location_name}
     end
 
-    self.locations = location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+    self.locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
   end
 
   def remote
