@@ -9,14 +9,14 @@ RSpec.describe JobOffer, type: :model do
     end
 
     it 'does not validate when job_offer locations is empty' do
-      job_offer = build(:job_offer, location: '', remote: '0')
+      job_offer = build(:job_offer, city_names: '', remote: '0')
 
       expect(job_offer.validate).to eq false
     end
 
     context 'when job_offer is remote' do
       it 'validates when location is not present' do
-        job_offer = build(:job_offer, location: '', remote: '1')
+        job_offer = build(:job_offer, city_names: '', remote: '1')
 
         expect(job_offer.validate).to eq true
       end
@@ -24,7 +24,7 @@ RSpec.describe JobOffer, type: :model do
 
     context 'when job_offer is not remote' do
       it 'validates when location is present' do
-        job_offer = build(:job_offer, location: 'Warszawa', remote: '0')
+        job_offer = build(:job_offer, city_names: 'Warszawa', remote: '0')
 
         expect(job_offer.validate).to eq true
       end
@@ -100,13 +100,13 @@ RSpec.describe JobOffer, type: :model do
     end
   end
 
-  describe "#location=" do
+  describe "#city_names=" do
     it 'assigns locations with given names to job_offer' do
       location = create(:location, name: 'Warszawa')
 
       job_offer = JobOffer.new
 
-      job_offer.location = "Warszawa, Białystok"
+      job_offer.city_names = "Warszawa, Białystok"
 
       expect(job_offer.locations.map(&:name)).to eq ["Warszawa", "Białystok"]
     end
@@ -116,7 +116,7 @@ RSpec.describe JobOffer, type: :model do
 
       job_offer = JobOffer.new
 
-      job_offer.location = "Warszawa, Białystok"
+      job_offer.city_names = "Warszawa, Białystok"
 
       expect(job_offer.locations.map(&:persisted?)).to eq [true, false]
     end

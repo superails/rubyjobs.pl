@@ -8,6 +8,6 @@ FactoryBot.define do
     company
     email { "marcin@rubyjobs.pl" }
     remote { "1" }
-    location { "Warszawa, Białystok" }
+    city_names { "Warszawa, Białystok" }
   end
 end

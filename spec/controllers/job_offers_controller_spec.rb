@@ -17,14 +17,14 @@ RSpec.describe JobOffersController, type: :controller do
       it 'assigns copy of JobOffer with job_offer_id from session to @job_offer' do
         current_job_offer = create(:job_offer, 
                              title: 'Senior Ruby on Rails developer',
-                             location: "Warszawa, Białystok",
+                             city_names: "Warszawa, Białystok",
                              remote: '1')
         session[:job_offer_id] = current_job_offer.id
 
         get :new
 
         expect(assigns(:job_offer).title).to eq 'Senior Ruby on Rails developer'
-        expect(assigns(:job_offer).location).to eq 'Warszawa, Białystok'
+        expect(assigns(:job_offer).city_names).to eq 'Warszawa, Białystok'
         expect(assigns(:job_offer).company.name).to eq current_job_offer.company.name
         expect(assigns(:job_offer).remote).to eq '1'
       end

@@ -10,13 +10,13 @@ class JobOffer < ApplicationRecord
   validates :title, :locations, :salary, :apply_link, :email, presence: true
   validates :email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
 
-  def location
+  def city_names
     locations.reject{|location| location.name == 'Zdalnie'}.map(&:name).join(', ')
   end
 
-  def location=(location)
-    location_params = location.split(/\s*,\s*/).map do |location_name|
-      {name: location_name}
+  def city_names=(city_names)
+    location_params = city_names.split(/\s*,\s*/).map do |city_name|
+      {name: city_name}
     end
 
     self.locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}

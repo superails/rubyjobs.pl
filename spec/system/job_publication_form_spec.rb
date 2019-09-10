@@ -15,7 +15,7 @@ RSpec.describe "Job publication form", :type => :system do
     click_link "Dodaj ogłoszenie"
 
     fill_in :job_offer_title, with: "Ruby on Rails Developer"
-    fill_in :job_offer_location, with: "Warszawa, Białystok"
+    fill_in :job_offer_city_names, with: "Warszawa, Białystok"
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
@@ -48,7 +48,7 @@ RSpec.describe "Job publication form", :type => :system do
     click_link "Dodaj ogłoszenie"
 
     fill_in :job_offer_title, with: "Ruby on Rails Developer"
-    fill_in :job_offer_location, with: "Warszawa, Białystok"
+    fill_in :job_offer_city_names, with: "Warszawa, Białystok"
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
@@ -79,7 +79,7 @@ RSpec.describe "Job publication form", :type => :system do
     click_link "Dodaj ogłoszenie"
 
     fill_in :job_offer_title, with: "Ruby on Rails Developer"
-    fill_in :job_offer_location, with: "Warszawa, Białystok"
+    fill_in :job_offer_city_names, with: "Warszawa, Białystok"
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
@@ -107,7 +107,7 @@ RSpec.describe "Job publication form", :type => :system do
     click_link "Dodaj ogłoszenie"
 
     fill_in :job_offer_title, with: "Ruby on Rails Developer"
-    fill_in :job_offer_location, with: "Warszawa, Białystok"
+    fill_in :job_offer_city_names, with: "Warszawa, Białystok"
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
@@ -132,7 +132,7 @@ RSpec.describe "Job publication form", :type => :system do
       click_link "Dodaj ogłoszenie"
 
       fill_in :job_offer_title, with: "Ruby on Rails Developer"
-      fill_in :job_offer_location, with: "Warszawa, Białystok"
+      fill_in :job_offer_city_names, with: "Warszawa, Białystok"
       check :job_offer_remote
       fill_in :job_offer_salary, with: "11000 - 18000"
       select "Umowa o pracę", from: :job_offer_salary_type

@@ -12,7 +12,7 @@ class JobOffersController < ApplicationController
       old_job_offer = JobOffer.find(session[:job_offer_id])
 
       @job_offer = old_job_offer.dup
-      @job_offer.location = old_job_offer.location 
+      @job_offer.city_names = old_job_offer.city_names
       @job_offer.remote = old_job_offer.remote
       @job_offer.company = old_job_offer.company
     else
@@ -32,6 +32,6 @@ class JobOffersController < ApplicationController
   private
 
   def job_offer_params
-    params.require(:job_offer).permit(:title, :location, :remote, :salary, :salary_type, :description, :apply_link, :email, company_attributes: [:name, :logo])
+    params.require(:job_offer).permit(:title, :city_names, :remote, :salary, :salary_type, :description, :apply_link, :email, company_attributes: [:name, :logo])
   end
 end
