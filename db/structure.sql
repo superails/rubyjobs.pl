@@ -125,10 +125,10 @@ ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
 
 
 --
--- Name: jobs; Type: TABLE; Schema: public; Owner: -
+-- Name: job_offers; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.jobs (
+CREATE TABLE public.job_offers (
     id bigint NOT NULL,
     title character varying,
     salary character varying,
@@ -144,10 +144,10 @@ CREATE TABLE public.jobs (
 
 
 --
--- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: job_offers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.jobs_id_seq
+CREATE SEQUENCE public.job_offers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -156,10 +156,10 @@ CREATE SEQUENCE public.jobs_id_seq
 
 
 --
--- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: job_offers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.jobs_id_seq OWNED BY public.jobs.id;
+ALTER SEQUENCE public.job_offers_id_seq OWNED BY public.job_offers.id;
 
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE public.schema_migrations (
 
 CREATE TABLE public.sites (
     id bigint NOT NULL,
-    job_id bigint,
+    job_offer_id bigint,
     location_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -256,10 +256,10 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
--- Name: jobs id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: job_offers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.jobs ALTER COLUMN id SET DEFAULT nextval('public.jobs_id_seq'::regclass);
+ALTER TABLE ONLY public.job_offers ALTER COLUMN id SET DEFAULT nextval('public.job_offers_id_seq'::regclass);
 
 
 --
@@ -309,11 +309,11 @@ ALTER TABLE ONLY public.companies
 
 
 --
--- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: job_offers job_offers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.jobs
-    ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.job_offers
+    ADD CONSTRAINT job_offers_pkey PRIMARY KEY (id);
 
 
 --
@@ -362,17 +362,17 @@ CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_b
 
 
 --
--- Name: index_jobs_on_company_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_job_offers_on_company_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_jobs_on_company_id ON public.jobs USING btree (company_id);
+CREATE INDEX index_job_offers_on_company_id ON public.job_offers USING btree (company_id);
 
 
 --
--- Name: index_sites_on_job_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_sites_on_job_offer_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_sites_on_job_id ON public.sites USING btree (job_id);
+CREATE INDEX index_sites_on_job_offer_id ON public.sites USING btree (job_offer_id);
 
 
 --
@@ -387,7 +387,7 @@ CREATE INDEX index_sites_on_location_id ON public.sites USING btree (location_id
 --
 
 ALTER TABLE ONLY public.sites
-    ADD CONSTRAINT fk_rails_898c38bf0b FOREIGN KEY (job_id) REFERENCES public.jobs(id);
+    ADD CONSTRAINT fk_rails_898c38bf0b FOREIGN KEY (job_offer_id) REFERENCES public.job_offers(id);
 
 
 --
@@ -399,10 +399,10 @@ ALTER TABLE ONLY public.sites
 
 
 --
--- Name: jobs fk_rails_b34da78090; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: job_offers fk_rails_b34da78090; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.jobs
+ALTER TABLE ONLY public.job_offers
     ADD CONSTRAINT fk_rails_b34da78090 FOREIGN KEY (company_id) REFERENCES public.companies(id);
 
 
@@ -427,6 +427,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190810111156'),
 ('20190810115044'),
 ('20190810120200'),
-('20190815190848');
+('20190815190848'),
+('20190910200802'),
+('20190910203010');
 
 

@@ -1,4 +1,4 @@
-class JobDecorator < Draper::Decorator
+class JobOfferDecorator < Draper::Decorator
   delegate_all
 
   def location_names

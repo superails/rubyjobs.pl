@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :job do
+  factory :job_offer do
     title { "MyString" }
     salary { "MyString" }
     salary_type { "MyString" }

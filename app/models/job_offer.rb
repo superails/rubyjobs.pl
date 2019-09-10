@@ -1,4 +1,4 @@
-class Job < ApplicationRecord
+class JobOffer < ApplicationRecord
   belongs_to :company
   has_many :sites
   has_many :locations, through: :sites

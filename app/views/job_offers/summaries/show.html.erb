@@ -17,21 +17,21 @@
 </div>
 
 <div class="container m-auto max-w-3xl px-4 mt-6">
-  <%= render partial: 'jobs/job', locals: {job: @job} %>
+  <%= render partial: 'job_offers/job_offer', locals: {job_offer: @job_offer} %>
 </div>
 
 <div class="container m-auto max-w-3xl px-4 mt-6">
   <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Informacje dodatkowe</h2>
   <div class="mb-8">
     <ul class="list-disc">
-      <li class="ml-4">Ogłoszenie będzie aktywne do <%= @job.expiration_time %></li>
-      <li class="ml-4">Informacje o zakończeniu wyświetlania ogłoszenia otrzymasz na adres: <%= @job.email %></li>
+      <li class="ml-4">Ogłoszenie będzie aktywne do <%= @job_offer.expiration_time %></li>
+      <li class="ml-4">Informacje o zakończeniu wyświetlania ogłoszenia otrzymasz na adres: <%= @job_offer.email %></li>
     </ul>
   </div>
 
   <div class="flex justify-between border-t pt-8">
-    <%= link_to "Wstecz", jobs_preview_path, class: "text-red-600 py-4 text-xl font-bold" %>
-    <%= link_to "Publikuj", jobs_publication_path, method: :post, class: "bg-red-600 text-white px-8 py-4 text-xl font-bold rounded" %>
+    <%= link_to "Wstecz", job_offers_preview_path, class: "text-red-600 py-4 text-xl font-bold" %>
+    <%= link_to "Publikuj", job_offers_publication_path, method: :post, class: "bg-red-600 text-white px-8 py-4 text-xl font-bold rounded" %>
   </div>
 </div>
 

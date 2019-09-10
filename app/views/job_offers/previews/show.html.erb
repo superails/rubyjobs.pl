@@ -18,23 +18,23 @@
 
 <div class="container m-auto max-w-3xl px-4 mt-6">
   <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Strona główna</h2>
-  <%= render partial: 'jobs/job', locals: {job: @job} %>
+  <%= render partial: 'job_offers/job_offer', locals: {job_offer: @job_offer} %>
 </div>
 <div class="container m-auto max-w-3xl px-4 pt-4 pb-10">
   <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Treść ogłoszenia</h2>
   <div class="border-b pb-5">
-    <p class="text-gray-800 text-xl mb-2"><%= @job.company.name %></p>
-    <p class="text-2xl font-bold"><%= @job.title %></p>
-    <p class="text-gray-800 mb-2"><%= @job.location_names %></p>
-    <p class="text-gray-800"><%= @job.salary %> (<%= @job.salary_type %>)</p>
+    <p class="text-gray-800 text-xl mb-2"><%= @job_offer.company.name %></p>
+    <p class="text-2xl font-bold"><%= @job_offer.title %></p>
+    <p class="text-gray-800 mb-2"><%= @job_offer.location_names %></p>
+    <p class="text-gray-800"><%= @job_offer.salary %> (<%= @job_offer.salary_type %>)</p>
   </div>
   <div class="mt-5 pb-6 leading-relaxed text-gray-800 mb-6">
     <div class="trix-content" ng-bind-html="$ctrl.offer.body">
-      <%= @job.description %>
+      <%= @job_offer.description %>
     </div>
   </div>
   <div class="flex justify-between border-t pt-8">
-    <%= link_to "Wstecz", new_job_path, class: "text-red-600 py-4 text-xl font-bold" %>
-    <%= link_to "Dalej", jobs_summary_path, class: "bg-red-600 text-white px-12 py-4 text-xl font-bold rounded" %>
+    <%= link_to "Wstecz", new_job_offer_path, class: "text-red-600 py-4 text-xl font-bold" %>
+    <%= link_to "Dalej", job_offers_summary_path, class: "bg-red-600 text-white px-12 py-4 text-xl font-bold rounded" %>
   </div>
 </div>
