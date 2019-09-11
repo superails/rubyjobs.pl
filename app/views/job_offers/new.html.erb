@@ -17,18 +17,20 @@
 </div>
 
 <div class="container mx-auto px-4 pb-10 max-w-3xl">
-  <%= form_with model: @job_offer do |form| %>
+  <%= form_with model: @job_offer, local: true do |form| %>
     <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Informacje o stanowisku</h2>
 
     <div class="mb-6">
       <%= form.label :title, "Nazwa stanowiska", class: "block text-gray-700 mb-2 text-lg" %>
-      <%= form.text_field :title, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'error', locals: {attribute_name: :title} %>
+      <%= form.text_field :title, class: "#{'border-red-500' if @job_offer.errors[:title].present?} w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
       <p class="text-sm text-gray-500">Na przykład: Senior Ruby on Rails Developer.</p>
     </div>
 
     <div class="mb-6">
       <%= form.label :city_names, "Lokalizacja", class: "block text-gray-700 mb-2 text-lg" %>
-      <%= form.text_field :city_names, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'error', locals: {attribute_name: :locations} %>
+      <%= form.text_field :city_names, class: "#{'border-red-500' if @job_offer.errors[:locations].present?} w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
       <p class="text-sm text-gray-500">Na przykład: Warszawa, Białystok.</p>
       <div>
         <%= form.label :remote, class: "text-gray-700 block mt-2" do %>
@@ -42,7 +44,8 @@
 
     <div class="mb-6">
       <%= form.label :salary, "Zarobki", class: "block text-gray-700 mb-2 text-lg" %>
-      <%= form.text_field :salary, class: "mr-4 border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'error', locals: {attribute_name: :salary} %>
+      <%= form.text_field :salary, class: "#{'border-red-500' if @job_offer.errors[:salary].present?} mr-4 border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
       <div class="relative inline-block">
         <%= form.select :salary_type, options_for_select(["B2B", "Umowa o pracę", "Umowa o dzieło"], @job_offer.salary_type), {}, class: "w-48 px-2 py-2 rounded bg-gray-100 border appearance-none" %>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -59,7 +62,8 @@
 
     <div class="mb-6">
       <%= form.label :apply_link, "Link do aplikowania", class: "block text-gray-700 mb-2 text-lg" %>
-      <%= form.text_field :apply_link, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'error', locals: {attribute_name: :apply_link} %>
+      <%= form.text_field :apply_link, class: "#{'border-red-500' if @job_offer.errors[:apply_link].present?} w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
       <p class="text-sm text-gray-500">Np. https://nazwafirmy.pl/jobs/apply lub jobs@nazwafirmy.pl</p>
     </div>
 
@@ -68,7 +72,8 @@
     <%= form.fields_for :company do |company_fields| %>
       <div class="mb-6">
         <%= form.label :name, "Nazwa firmy", class: "block text-gray-700 mb-2 text-lg" %>
-        <%= company_fields.text_field :name, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+        <%= render partial: 'error', locals: {attribute_name: :'company.name'} %>
+        <%= company_fields.text_field :name, class: "#{'border-red-500' if @job_offer.errors[:apply_link].present?} w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
       </div>
 
       <div class="mb-6">
@@ -79,7 +84,8 @@
 
     <div class="mb-6">
       <%= form.label :email, "Email", class: "block text-gray-700 mb-2 text-lg" %>
-      <%= form.text_field :email, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'error', locals: {attribute_name: :email} %>
+      <%= form.text_field :email, class: "#{'border-red-500' if @job_offer.errors[:email].present?} w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
     </div>
 
     <div class="flex justify-between border-t pt-8">

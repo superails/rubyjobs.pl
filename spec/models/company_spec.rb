@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Company, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it 'does not validate when name is not present' do
+      company = build(:company, name: '')
+
+      expect(company.validate).to eq false
+    end
+  end
 end

@@ -1,0 +1,7 @@
+<% if @job_offer.errors[attribute_name].present? %>
+  <ul class="pb-2">
+    <% @job_offer.errors.full_messages_for(attribute_name).each do |message| %>
+      <li class="text-red-500 text-xs"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
