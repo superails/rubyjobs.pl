@@ -54,5 +54,13 @@ RSpec.describe JobOffersController, type: :controller do
 
       expect(session[:job_offer_id]).to eq JobOffer.last.id
     end
+
+    context 'when invalid job offer params' do
+      it 'rerenders #new view' do
+        post :create, params: {job_offer: attributes_for(:job_offer, title: '')}
+
+        expect(response).to render_template(:new)
+      end
+    end
   end
 end

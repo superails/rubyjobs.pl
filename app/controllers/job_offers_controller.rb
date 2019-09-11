@@ -24,9 +24,12 @@ class JobOffersController < ApplicationController
   def create
     @job_offer = JobOffer.new(job_offer_params)
 
-    session[:job_offer_id] = @job_offer.id if @job_offer.save
-
-    redirect_to job_offers_preview_path
+    if @job_offer.save
+      session[:job_offer_id] = @job_offer.id 
+      redirect_to job_offers_preview_path
+    else
+      render :new
+    end
   end
 
   private
