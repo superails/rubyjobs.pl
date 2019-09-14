@@ -19,7 +19,7 @@ class JobOffer < ApplicationRecord
       {name: city_name}
     end
 
-    self.locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+    locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
   end
 
   def remote
@@ -28,6 +28,10 @@ class JobOffer < ApplicationRecord
 
   def remote=(value)
     locations << Location.find_or_initialize_by(name: 'Zdalnie') if value == "1"
+  end
+
+  def company_attributes=(attributes)
+    self.company = Company.find_or_initialize_by(name: attributes[:name])
   end
 
   def expiration_time

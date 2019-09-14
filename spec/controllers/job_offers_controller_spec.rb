@@ -71,5 +71,18 @@ RSpec.describe JobOffersController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
+
+    context 'when company exists in db' do
+      it 'assigns job offer to existing company' do
+        company = create(:company, name: 'Firma')
+
+        post :create, params: {
+          job_offer: attributes_for(:job_offer, title: 'Senior Ruby on Rails Developer').
+          merge({company_attributes: attributes_for(:company, name: 'Firma')})
+        }
+
+        expect(JobOffer.last.company).to eq company
+      end
+    end
   end
 end

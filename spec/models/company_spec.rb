@@ -7,5 +7,12 @@ RSpec.describe Company, type: :model do
 
       expect(company.validate).to eq false
     end
+
+    it 'does not validate when name is not unique' do
+      create(:company, name: 'Firma')
+      company = build(:company, name: 'Firma')
+
+      expect(company.validate).to eq false
+    end
   end
 end
