@@ -1,6 +1,6 @@
 class JobOffersController < ApplicationController
   def index
-    @job_offers = JobOffer.published.includes(:locations, :company).decorate
+    @job_offers = JobOffer.published.order('published_at DESC').includes(:locations, :company).decorate
   end
 
   def show

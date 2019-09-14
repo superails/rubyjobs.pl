@@ -10,6 +10,15 @@ RSpec.describe JobOffersController, type: :controller do
 
       expect(assigns(:job_offers).pluck(:id)).to eq [published_job_offer.id]
     end
+
+    it 'assigns job offers ordered by publication date' do
+      old_job_offer = create(:job_offer, published_at: Time.zone.now - 1.hour)
+      new_job_offer = create(:job_offer, published_at: Time.zone.now)
+
+      get :index
+
+      expect(assigns(:job_offers).first).to eq new_job_offer
+    end
   end
 
   describe 'GET #new' do
