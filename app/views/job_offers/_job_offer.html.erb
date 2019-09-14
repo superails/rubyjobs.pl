@@ -1,7 +1,7 @@
 <%= link_to job_offer do %>
   <div class="border border-gray-300 px-6 py-5 flex items-center mb-8">
     <div class="w-12 mr-6">
-      <img src="https://rubyjobs.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e859ea0fad91aa330c892c4f2cf45449c62c480/chimeraprime_logo.png">
+      <%= image_tag(job_offer.company.logo) if job_offer.company.logo.attached? %>
     </div>
     <div class="w-full">
       <div class="flex justify-between">
