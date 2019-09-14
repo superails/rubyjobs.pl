@@ -20,12 +20,7 @@ RSpec.describe "Job publication form errors", :type => :system do
 
     click_button "Dalej"
 
-    expect(page).to have_text("Title can't be blank")
-    expect(page).to have_text("Locations can't be blank")
-    expect(page).to have_text("Salary can't be blank")
-    expect(page).to have_text("Apply link can't be blank")
-    expect(page).to have_text("Company name can't be blank")
-    expect(page).to have_text("Email can't be blank")
-    expect(page).to have_text("Email is invalid")
+    expect(page).to have_text("nie może być puste")
+    expect(page).to have_text("jest nieprawidłowe")
   end
 end
