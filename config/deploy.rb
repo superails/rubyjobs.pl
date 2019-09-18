@@ -1,6 +1,6 @@
 server 'rubyjobs', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@bitbucket.org:mdoliwa/rubyjobs.git'
+set :repo_url,        'git@gitlab.com:mdoliwa/rubyjobs.git'
 set :application,     'rubyjobs'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
