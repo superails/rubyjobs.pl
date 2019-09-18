@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Job publication form errors", :type => :system do
-  before do
-    driven_by(:selenium_chrome_headless)
-  end
-
   it 'shows error messages' do
     visit "/"
     click_link "Dodaj ogłoszenie"

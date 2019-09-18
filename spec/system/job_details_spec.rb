@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Job details", :type => :system do
-  before do
-    driven_by(:selenium_chrome_headless)
-  end
-
   it 'shows job_offer details' do
     visit "/"
     click_link "Dodaj ogłoszenie"

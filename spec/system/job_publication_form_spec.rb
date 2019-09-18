@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "Job publication form", :type => :system do
   before do
-    driven_by(:selenium_chrome_headless)
     Timecop.freeze('2019-01-01')
   end
 
