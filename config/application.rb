@@ -31,5 +31,10 @@ module Rubyjobs
     config.generators.system_tests = nil
     config.active_record.schema_format = :sql
     config.i18n.default_locale = :pl
+
+    ActiveStorage::Engine.config
+      .active_storage
+      .content_types_to_serve_as_binary
+      .delete('image/svg+xml')
   end
 end
