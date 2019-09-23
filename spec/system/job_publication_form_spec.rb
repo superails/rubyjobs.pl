@@ -38,6 +38,7 @@ RSpec.describe "Job publication form", :type => :system do
     expect(page).to have_text("Białystok")
     expect(page).to have_text("11000 - 18000")
     expect(page).to have_text("B2B")
+    expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
 
     expect(page).to have_text("Ogłoszenie zostało opublikowane, informacje zostały wysłane na adres marcin@rubyjobs.pl")
   end
@@ -68,6 +69,7 @@ RSpec.describe "Job publication form", :type => :system do
     expect(page).to have_text("Białystok")
     expect(page).to have_text("11000 - 18000")
     expect(page).to have_text("B2B")
+    expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
 
     expect(page).to have_text("Treść ogłoszenia")
     expect(page).to have_text("Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.")
@@ -99,6 +101,7 @@ RSpec.describe "Job publication form", :type => :system do
     expect(page).to have_text("Białystok")
     expect(page).to have_text("11000 - 18000")
     expect(page).to have_text("B2B")
+    expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
   end
 
   it 'shows job publication info on publication step' do

@@ -31,7 +31,9 @@ class JobOffer < ApplicationRecord
   end
 
   def company_attributes=(attributes)
-    self.company = Company.find_or_initialize_by(name: attributes[:name])
+    self.company = Company.find_or_initialize_by(name: attributes[:name]) do |company|
+      company.logo = attributes[:logo]
+    end
   end
 
   def expiration_time
