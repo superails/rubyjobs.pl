@@ -6,6 +6,7 @@ class JobOffer < ApplicationRecord
   accepts_nested_attributes_for :company
 
   scope :published, -> { where.not(published_at: nil) }
+  scope :submitted, -> { where.not(submitted_at: nil) }
 
   validates :title, :locations, :salary, :apply_link, :email, presence: true
   validates :email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }

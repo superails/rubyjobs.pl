@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: 'job_offers#index'
 
   namespace :job_offers, path: 'jobs' do 

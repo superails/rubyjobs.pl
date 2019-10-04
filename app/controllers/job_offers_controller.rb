@@ -1,6 +1,10 @@
 class JobOffersController < ApplicationController
   def index
-    @job_offers = JobOffer.published.order('published_at DESC').includes(:locations, :company).decorate
+    if current_user.admin?
+      @job_offers = JobOffer.submitted.order('published_at DESC, submitted_at DESC').decorate
+    else
+      @job_offers = JobOffer.published.order('published_at DESC').includes(:locations, :company).decorate
+    end
   end
 
   def show
