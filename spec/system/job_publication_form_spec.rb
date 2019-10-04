@@ -9,7 +9,7 @@ RSpec.describe "Job publication form", :type => :system do
     Timecop.return
   end
 
-  it 'allows to publish a job' do
+  it 'allows to submit a job' do
     visit "/"
     click_link "Dodaj ogłoszenie"
 
@@ -29,18 +29,7 @@ RSpec.describe "Job publication form", :type => :system do
     click_link "Dalej"
     click_link "Publikuj"
 
-
-    expect(page).to have_text("Dodaj ogłoszenie")
-    expect(page).to have_text("rubyjobs i spółka")
-    expect(page).to have_text("Ruby on Rails Developer")
-    expect(page).to have_text("Zdalnie")
-    expect(page).to have_text("Warszawa")
-    expect(page).to have_text("Białystok")
-    expect(page).to have_text("11000 - 18000")
-    expect(page).to have_text("B2B")
-    expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
-
-    expect(page).to have_text("Ogłoszenie zostało opublikowane, informacje zostały wysłane na adres marcin@rubyjobs.pl")
+    expect(page).to have_text("Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres marcin@rubyjobs.pl")
   end
 
   it 'shows job offer data on preview step' do
