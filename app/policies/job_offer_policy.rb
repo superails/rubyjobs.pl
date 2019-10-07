@@ -1,6 +1,6 @@
 class JobOfferPolicy < ApplicationPolicy
   def create?
-    user.admin? && record.unpublished?
+    user.admin? && record.submitted? && record.unpublished?
   end
 
   def destroy?
