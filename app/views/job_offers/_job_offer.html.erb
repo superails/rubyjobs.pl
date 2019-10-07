@@ -6,7 +6,7 @@
     <div class="w-full">
       <div class="flex justify-between">
         <p class="text-gray-700 mb-3"><%= job_offer.company.name %></p>
-        <% if current_user.admin? && job_offer.unpublished? %>
+        <% if policy(job_offer).publish? %>
           <%= link_to "Accept", job_offers_publications_path(job_offer_id: job_offer), method: :post %> | 
           <%= link_to "Reject", job_offers_publication_path(job_offer_id: job_offer), method: :delete %> | 
         <% else %>

@@ -1,6 +1,8 @@
 class JobOffers::PublicationsController < ApplicationController
+
   def create
     job_offer = JobOffer.find(params[:job_offer_id])
+    authorize job_offer
     job_offer.update(published_at: Time.zone.now)
 
     redirect_back(fallback_location: root_path)

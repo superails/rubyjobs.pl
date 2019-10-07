@@ -45,4 +45,8 @@ class JobOffer < ApplicationRecord
   def published?
     !!published_at
   end
+
+  def unpublished?
+    !published_at
+  end
 end
