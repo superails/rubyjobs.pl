@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Job publication form errors", :type => :system do
+RSpec.describe "Job offer publication form errors", :type => :system do
   it 'shows error messages' do
     visit "/"
     click_link "Dodaj ogłoszenie"

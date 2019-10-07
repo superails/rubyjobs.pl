@@ -6,6 +6,7 @@ class JobOffer < ApplicationRecord
   accepts_nested_attributes_for :company
 
   scope :published, -> { where.not(published_at: nil) }
+  scope :unpublished, -> { where(published_at: nil) }
   scope :submitted, -> { where.not(submitted_at: nil) }
 
   validates :title, :locations, :salary, :apply_link, :email, presence: true
@@ -39,5 +40,9 @@ class JobOffer < ApplicationRecord
 
   def expiration_time
     (created_at + 30.days).strftime("%d.%m.%Y")
+  end
+
+  def published?
+    !!published_at
   end
 end

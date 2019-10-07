@@ -6,7 +6,12 @@
     <div class="w-full">
       <div class="flex justify-between">
         <p class="text-gray-700 mb-3"><%= job_offer.company.name %></p>
-        <p class="text-gray-400"><%= job_offer.time_since_publication %></p>
+        <% if current_user.admin? && job_offer.unpublished? %>
+          <%= link_to "Accept", job_offers_publications_path(job_offer_id: job_offer), method: :post %> | 
+          <%= link_to "Reject", job_offers_publication_path(job_offer_id: job_offer), method: :delete %> | 
+        <% else %>
+          <p class="text-gray-400"><%= job_offer.time_since_publication %></p>
+        <% end %>
       </div>
       <p class="text-lg font-bold"><%= job_offer.title %></p>
       <p class="text-gray-700"><%= job_offer.location_names %></p>

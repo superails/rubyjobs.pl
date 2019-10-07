@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource :preview, only: [:show]
     resource :summary, only: [:show]
     resource :submission, only: [:create]
+    resources :publications, only: [:create, :destroy], param: :job_offer_id
   end
 
   resources :jobs, only: [:index, :show, :new, :create], controller: 'job_offers', as: 'job_offers'

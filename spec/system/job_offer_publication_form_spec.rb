@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Job publication form", :type => :system do
+RSpec.describe "Job offer publication form", :type => :system do
   before do
     Timecop.freeze('2019-01-01')
   end
@@ -62,6 +62,9 @@ RSpec.describe "Job publication form", :type => :system do
 
     expect(page).to have_text("Treść ogłoszenia")
     expect(page).to have_text("Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.")
+
+    expect(page).to_not have_link("Accept")
+    expect(page).to_not have_link("Reject")
   end
 
   it 'shows job offer data on publication step' do
