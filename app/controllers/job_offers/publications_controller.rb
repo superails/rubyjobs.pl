@@ -3,7 +3,7 @@ class JobOffers::PublicationsController < ApplicationController
   before_action :authorize_job_offer
 
   def create
-    @job_offer.update(published_at: Time.zone.now)
+    JobOfferPublisher.new(@job_offer).call
 
     redirect_back(fallback_location: root_path)
   end
