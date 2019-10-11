@@ -25,7 +25,7 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
     it 'does not allow to perform action when not authorized' do
       job_offer = create(:job_offer, submitted_at: Time.zone.now)
 
-      expect {delete :destroy, params: {use_route: 'job_offers/submissions', job_offer_id: job_offer.id}}.to raise_error(Pundit::NotAuthorizedError)
+      expect {delete :destroy, params: {job_offer_id: job_offer.id}}.to raise_error(Pundit::NotAuthorizedError)
     end
 
     it 'revokes job offer submission' do
@@ -34,7 +34,7 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
 
       job_offer = create(:job_offer, submitted_at: Time.zone.now)
 
-      delete :destroy, params: {use_route: 'job_offers/submissions', job_offer_id: job_offer.id}
+      delete :destroy, params: {job_offer_id: job_offer.id}
 
       expect(job_offer.reload).to_not be_submitted
     end
