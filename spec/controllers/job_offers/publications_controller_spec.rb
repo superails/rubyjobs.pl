@@ -35,15 +35,6 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
       expect(job_offer.reload).to be_published
     end
   end
-
-  describe 'DELETE #destroy' do
-    it 'does not allow to perform action when not authorized' do
-      job_offer = create(:job_offer, submitted_at: Time.zone.now)
-
-      expect {delete :create, params: {job_offer_id: job_offer.id}}.to raise_error(Pundit::NotAuthorizedError)
-    end
-  end
-
 end
 
 

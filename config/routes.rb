@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   namespace :job_offers, path: 'jobs' do 
     resource :preview, only: [:show]
     resource :summary, only: [:show]
-    resource :submission, only: [:create]
-    resources :publications, only: [:create, :destroy], param: :job_offer_id
+    resources :submissions, only: [:create, :destroy], param: :job_offer_id
+    resources :publications, only: [:create], param: :job_offer_id
   end
 
   resources :jobs, only: [:index, :show, :new, :create], controller: 'job_offers', as: 'job_offers'

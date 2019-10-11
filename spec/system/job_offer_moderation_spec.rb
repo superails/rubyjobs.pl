@@ -34,6 +34,7 @@ RSpec.describe "Job offer moderation", :type => :system do
     visit "/"
     click_link "Accept"
 
+    expect(page).to have_text "Ruby on Rails Developer"
     expect(page).to_not have_link "Accept" 
   end
 
@@ -46,7 +47,7 @@ RSpec.describe "Job offer moderation", :type => :system do
     visit "/"
     click_link "Reject"
 
-    expect(page).to_not have_link "Reject" 
+    expect(page).to_not have_text "Ruby on Rails Developer"
   end
 end
 

@@ -8,12 +8,6 @@ class JobOffers::PublicationsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def destroy
-    @job_offer.update(submitted_at: nil)
-
-    redirect_back(fallback_location: root_path)
-  end
-
   private
 
   def find_job_offer
