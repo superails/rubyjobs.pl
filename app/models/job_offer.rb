@@ -53,4 +53,8 @@ class JobOffer < ApplicationRecord
   def submitted?
     !!submitted_at
   end
+
+  def to_param
+    [id, title.parameterize, company.name.parameterize].join('-')
+  end
 end
