@@ -5,3 +5,16 @@
 @import "tailwindcss/utilities";
 
 .field_with_errors { display: inline; }
+
+.trix-content ul {
+  list-style-type: disc;
+  padding-left: 2.5rem;
+}
+
+trix-toolbar .trix-button-row { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+} 
+
+
