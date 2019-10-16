@@ -1,4 +1,6 @@
 class JobOffer < ApplicationRecord
+  DEFAULT_EXPIRATION_TIME = 30.days
+
   belongs_to :company
   has_many :sites
   has_many :locations, through: :sites
@@ -39,7 +41,7 @@ class JobOffer < ApplicationRecord
   end
 
   def expiration_time
-    (created_at + 30.days).strftime("%d.%m.%Y")
+    (created_at + DEFAULT_EXPIRATION_TIME).strftime("%d.%m.%Y")
   end
 
   def published?

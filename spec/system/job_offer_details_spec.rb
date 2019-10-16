@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Job offer details", :type => :system do
+  let(:admin) { create(:user, admin: true) }
+
   it 'shows job_offer details' do
     visit "/"
     click_link "Dodaj ogłoszenie"
@@ -10,7 +12,7 @@ RSpec.describe "Job offer details", :type => :system do
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
-    fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+    find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
     fill_in :job_offer_apply_link, with: "https://rubyjob_offers.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjob_offers i spółka"
@@ -20,6 +22,12 @@ RSpec.describe "Job offer details", :type => :system do
     click_button "Dalej"
     click_link "Dalej"
     click_link "Publikuj"
+
+    visit "/users/sign_in"
+    fill_in :user_email, with: admin.email
+    fill_in :user_password, with: admin.password
+    click_button "Login" 
+    click_link "Accept"
 
     visit "/"
     click_link "Ruby on Rails Developer"

@@ -18,7 +18,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
-    fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+    find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
@@ -41,7 +41,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
-    fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+    find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
@@ -76,7 +76,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
-    fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+    find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
@@ -105,7 +105,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     check :job_offer_remote
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
-    fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+    find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
@@ -130,7 +130,7 @@ RSpec.describe "Job offer publication form", :type => :system do
       check :job_offer_remote
       fill_in :job_offer_salary, with: "11000 - 18000"
       select "Umowa o pracę", from: :job_offer_salary_type
-      fill_in :job_offer_description, with: "Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia."
+      find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
       fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
       fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"

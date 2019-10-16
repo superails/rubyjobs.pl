@@ -8,7 +8,7 @@ RSpec.describe "Job offer publication form errors", :type => :system do
     fill_in :job_offer_title, with: ""
     fill_in :job_offer_city_names, with: ""
     fill_in :job_offer_salary, with: ""
-    fill_in :job_offer_description, with: ""
+    find('trix-editor').click.set("")
     fill_in :job_offer_apply_link, with: ""
 
     fill_in :job_offer_company_attributes_name, with: ""

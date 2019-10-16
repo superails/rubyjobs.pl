@@ -65,6 +65,9 @@ RSpec.configure do |config|
     driven_by(:selenium_chrome_headless)
   end
 
+  config.before(:each) { ActionMailer::Base.deliveries.clear }
+
   config.include Devise::Test::ControllerHelpers, type: :controller
+
 
 end
