@@ -33,6 +33,8 @@ set :branch, 'master'
 set :linked_dirs, %w{log storage public/blog}
 # set :linked_files, %w{config/master.key}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+#
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
