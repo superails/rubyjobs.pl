@@ -8,8 +8,8 @@
         <p class="text-gray-700 mb-3"><%= job_offer.company.name %></p>
         <% if policy(job_offer).create? %>
           <div class="text-sm">
-          <%= link_to "Accept", job_offers_publications_path(job_offer_id: job_offer), method: :post, class: "text-green-500" %> | 
-          <%= link_to "Reject", job_offers_submission_path(job_offer_id: job_offer.id), method: :delete, class: "text-red-500" %> 
+            <%= link_to "Accept", job_offers_publications_path(job_offer_id: job_offer), method: :post, class: "text-green-500" %> | 
+            <%= link_to "Reject", job_offers_submission_path(job_offer_id: job_offer.id), method: :delete, class: "text-red-500" %> 
           </div>
         <% else %>
           <p class="text-gray-400"><%= job_offer.time_since_publication %></p>

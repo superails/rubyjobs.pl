@@ -1,6 +1,7 @@
 class JobOfferExpirationChecker
   def call
     expired_job_offers = JobOffer.
+      where.not(published_at: nil).
       where('published_at < ?', Time.zone.now - JobOffer::DEFAULT_EXPIRATION_TIME).
       where(expired_at: nil)
 

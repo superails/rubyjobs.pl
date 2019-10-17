@@ -27,7 +27,7 @@ RSpec.describe "Job offer publication form", :type => :system do
 
     click_button "Dalej"
     click_link "Dalej"
-    click_link "Publikuj"
+    click_link "Wyślij"
 
     expect(page).to have_text("Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres marcin@rubyjobs.pl")
   end

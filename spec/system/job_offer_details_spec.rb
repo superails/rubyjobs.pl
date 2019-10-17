@@ -21,7 +21,7 @@ RSpec.describe "Job offer details", :type => :system do
 
     click_button "Dalej"
     click_link "Dalej"
-    click_link "Publikuj"
+    click_link "Wyślij"
 
     visit "/users/sign_in"
     fill_in :user_email, with: admin.email

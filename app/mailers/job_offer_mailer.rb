@@ -1,13 +1,21 @@
 class JobOfferMailer < ApplicationMailer
-  def summary
-    job_offer = JobOffer.find(params[:id])
+  before_action :find_job_offer
 
-    mail(to: job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl zostało dodane")
+  def submit
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl zostało zapisane.")
+  end
+
+  def publish
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl zostało opublikowane.")
   end
 
   def expired
-    job_offer = JobOffer.find(params[:id])
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie przestało być wyświetlane.")
+  end
 
-    mail(to: job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl wygasło")
+  private
+
+  def find_job_offer
+    @job_offer = JobOffer.find(params[:id])
   end
 end

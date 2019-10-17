@@ -8,6 +8,6 @@ class JobOfferPublisher
   def call
     job_offer.update(published_at: Time.zone.now)
 
-    JobOfferMailer.with(id: job_offer.id).summary.deliver_now
+    JobOfferMailer.with(id: job_offer.id).publish.deliver_later
   end
 end

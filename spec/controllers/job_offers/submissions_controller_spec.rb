@@ -19,6 +19,15 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
 
       expect(job_offer.reload.submitted_at).to_not be_nil
     end
+
+    it 'sends email to job offer creator' do
+      job_offer = create(:job_offer,  email: 'marcin@rubyjobs.pl')
+      session[:job_offer_id] = job_offer.id
+
+      post :create
+
+      expect(ActionMailer::Base.deliveries.last.to).to eq ['marcin@rubyjobs.pl']
+    end
   end
 
   describe 'DELETE #destroy' do

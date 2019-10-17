@@ -21,7 +21,7 @@ RSpec.describe "Job offer moderation", :type => :system do
 
     click_button "Dalej"
     click_link "Dalej"
-    click_link "Publikuj"
+    click_link "Wyślij"
   end
 
   it 'allows to accept job offer' do

@@ -4,8 +4,7 @@ class JobOffers::SubmissionsController < ApplicationController
 
     session.delete(:job_offer_id)
 
-    job_offer.update(submitted_at: Time.zone.now)
-
+    JobOfferSubmitter.new(job_offer).call
     flash[:notice] = "Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres #{job_offer.email}"
     redirect_to root_path
   end
