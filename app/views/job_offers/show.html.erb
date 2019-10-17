@@ -8,7 +8,7 @@
   </div>
   <div class="mt-5 border-b pb-6 leading-relaxed text-gray-800 mb-6">
     <div class="trix-content" ng-bind-html="$ctrl.offer.body">
-      <%= @job_offer.description %>
+      <%= @job_offer.description.html_safe %>
     </div>
   </div>
   <%= link_to "Aplikuj teraz", @job_offer.apply_link, class: "bg-red-600 text-white font-bold px-6 py-4 inline-block text-lg rounded" %> 
