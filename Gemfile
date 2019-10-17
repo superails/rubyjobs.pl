@@ -19,7 +19,7 @@ gem 'devise'
 gem 'pundit'
 gem 'trix-rails', require: 'trix'
 gem 'whenever', require: false
-gem 'sidekiq'
+gem 'sidekiq', '~> 5'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
