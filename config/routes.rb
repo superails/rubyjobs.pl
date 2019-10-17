@@ -1,5 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_for :users
+
   root to: 'job_offers#index'
 
   namespace :job_offers, path: 'jobs' do 
