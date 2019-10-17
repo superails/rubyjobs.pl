@@ -8,6 +8,8 @@ require 'capistrano/rvm'
 require 'capistrano/puma'
 require 'capistrano/scm/git'
 require "whenever/capistrano"
+require 'capistrano/sidekiq'
+require 'capistrano/sidekiq/monit' #to require monit tasks # Only for capistrano3
 
 install_plugin Capistrano::Puma
 install_plugin Capistrano::SCM::Git
