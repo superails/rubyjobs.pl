@@ -119,4 +119,26 @@ RSpec.describe JobOffersController, type: :controller do
       end
     end
   end
+
+  describe 'GET #show' do
+    before :each do 
+      ActiveJob::Base.queue_adapter = :test
+    end
+
+    after :each do 
+      ActiveJob::Base.queue_adapter = :inline
+    end
+
+    context 'when job_offer is published' do
+      it 'enqueuest RegisterJobOfferVisitJob' do
+        job_offer = create(:job_offer)
+
+        expect { get :show, params: {id: job_offer.id} }.to have_enqueued_job(RegisterJobOfferVisitJob).with(job_offer.id)
+      end
+    end
+
+    context 'when job_offer is not published' do
+      it 'does not increas visits count'
+    end
+  end
 end

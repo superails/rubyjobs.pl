@@ -141,7 +141,8 @@ CREATE TABLE public.job_offers (
     email character varying,
     submitted_at timestamp without time zone,
     published_at timestamp without time zone,
-    expired_at timestamp without time zone
+    expired_at timestamp without time zone,
+    visits_count integer DEFAULT 0
 );
 
 
@@ -500,6 +501,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191003204000'),
 ('20191003210730'),
 ('20191004183718'),
-('20191014214043');
+('20191014214043'),
+('20191018204013');
 
 
