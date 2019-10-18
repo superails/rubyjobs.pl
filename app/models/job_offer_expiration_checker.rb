@@ -6,7 +6,7 @@ class JobOfferExpirationChecker
       where(expired_at: nil)
 
     expired_job_offers.each do |expired_job_offer|
-      JobOfferMailer.with(id: expired_job_offer.id).expired.deliver_now
+      JobOfferMailer.with(id: expired_job_offer.id).expire.deliver_now
     end
 
     expired_job_offers.update_all(expired_at: Time.zone.now)

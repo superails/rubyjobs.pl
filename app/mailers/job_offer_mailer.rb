@@ -2,15 +2,15 @@ class JobOfferMailer < ApplicationMailer
   before_action :find_job_offer
 
   def submit
-    mail(to: @job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl zostało zapisane.")
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie zostało dodane i czeka na publikację")
   end
 
   def publish
-    mail(to: @job_offer.email, subject: "Twoje ogłoszenie na rubyjobs.pl zostało opublikowane.")
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie zostało opublikowane")
   end
 
-  def expired
-    mail(to: @job_offer.email, subject: "Twoje ogłoszenie przestało być wyświetlane.")
+  def expire
+    mail(to: @job_offer.email, subject: "Twoje ogłoszenie przestało być wyświetlane")
   end
 
   private
