@@ -10,6 +10,7 @@ class JobOffer < ApplicationRecord
   scope :published, -> { where.not(published_at: nil) }
   scope :unpublished, -> { where(published_at: nil) }
   scope :submitted, -> { where.not(submitted_at: nil) }
+  scope :active, -> { where(expired_at: nil) }
 
   validates :title, :locations, :salary, :apply_link, :email, presence: true
   validates :email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
