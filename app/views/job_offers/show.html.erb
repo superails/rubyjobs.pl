@@ -11,5 +11,5 @@
       <%= @job_offer.description.html_safe %>
     </div>
   </div>
-  <%= link_to "Aplikuj teraz", job_offers_redirect_path(@job_offer), class: "bg-red-600 text-white font-bold px-6 py-4 inline-block text-lg rounded" %> 
+  <%= link_to "Aplikuj teraz", job_offers_redirect_path(@job_offer.id), class: "bg-red-600 text-white font-bold px-6 py-4 inline-block text-lg rounded" %> 
 </div>

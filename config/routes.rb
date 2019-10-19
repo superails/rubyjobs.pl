@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'job_offers#index'
 
   namespace :job_offers, path: 'jobs' do 
-    resource :redirect, only: [:show]
+    resources :redirects, only: [:show]
     resource :preview, only: [:show]
     resource :summary, only: [:show]
     resources :submissions, only: [:create, :destroy], param: :job_offer_id
