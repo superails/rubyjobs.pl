@@ -1,9 +1,12 @@
 Cześć,
 
-Twoje ogłoszenie <%= job_offer_url(@job_offer) %> przestało być wyświetlane.
+Twoje ogłoszenie <%= job_offer_url(@job_offer) %> jest już nieaktywne.
 
-Ogłoszenie było wyświetlane od ... do ...
-W tym czasie szczegóły ogłoszenia obejrzało X osób, a w link do aplikowania kliknięto X razy.
+Ogłoszenie było wyświetlane od <%= @job_offer.published_at.strftime("%d-%m-%Y %H:%M") %> do <%= @job_offer.expired_at.strftime("%d-%m-%Y %H:%M") %>
+W tym czasie ogłoszenie miało <%= @job_offer.visits_count %> wyświetleń i <%= @job_offer.apply_link_clicks_count %> kliknięć w link do aplikacji.
+
+Mam nadzieję, że udało Ci się znaleźć kogoś na to stanowisko. 
+Jeżeli nie, to <%= link_to "zapraszam do ponownego wrzucenia ogłoszenia", new_job_offer_path %>.
 
 Pozdrawiam,
 Marcin Doliwa
