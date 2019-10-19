@@ -142,7 +142,8 @@ CREATE TABLE public.job_offers (
     submitted_at timestamp without time zone,
     published_at timestamp without time zone,
     expired_at timestamp without time zone,
-    visits_count integer DEFAULT 0
+    visits_count integer DEFAULT 0,
+    apply_link_clicks_count integer DEFAULT 0
 );
 
 
@@ -502,6 +503,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191003210730'),
 ('20191004183718'),
 ('20191014214043'),
-('20191018204013');
+('20191018204013'),
+('20191019113937');
 
 

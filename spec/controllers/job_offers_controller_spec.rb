@@ -130,15 +130,19 @@ RSpec.describe JobOffersController, type: :controller do
     end
 
     context 'when job_offer is published' do
-      it 'enqueuest RegisterJobOfferVisitJob' do
-        job_offer = create(:job_offer)
+      it 'enqueues RegisterJobOfferVisitJob' do
+        job_offer = create(:job_offer, published_at: Time.zone.now)
 
         expect { get :show, params: {id: job_offer.id} }.to have_enqueued_job(RegisterJobOfferVisitJob).with(job_offer.id)
       end
     end
 
     context 'when job_offer is not published' do
-      it 'does not increas visits count'
+      it 'does not enqueue RegisterJobOfferVisitJob' do
+        job_offer = create(:job_offer, published_at: nil)
+
+        expect { get :show, params: {id: job_offer.id} }.to_not have_enqueued_job(RegisterJobOfferVisitJob).with(job_offer.id)
+      end
     end
   end
 end

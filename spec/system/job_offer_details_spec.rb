@@ -40,7 +40,7 @@ RSpec.describe "Job offer details", :type => :system do
     expect(page).to have_text("11000 - 18000")
     expect(page).to have_text("B2B")
     expect(page).to have_text("Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.")
-    expect(page).to have_link("Aplikuj teraz", href: "https://rubyjob_offers.pl/career/ruby_on_rails_developer")
+    expect(page).to have_link("Aplikuj teraz", href: /redirect/)
   end
 end
 

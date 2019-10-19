@@ -10,7 +10,7 @@ class JobOffersController < ApplicationController
   def show
     @job_offer = JobOffer.find(params[:id]).decorate
 
-    RegisterJobOfferVisitJob.perform_later(@job_offer.id)
+    RegisterJobOfferVisitJob.perform_later(@job_offer.id) if @job_offer.published?
   end
 
   def new
