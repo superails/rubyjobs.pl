@@ -26,6 +26,15 @@ RSpec.describe JobOffers::RedirectsController, type: :controller do
       end
     end
 
+    context 'when apply link is email address' do
+      it 'redirects to mailto: url' do
+        job_offer = create(:job_offer, apply_link: 'marcin@rubyjobs.pl')
+
+        get :show, params: {id: job_offer.id}
+
+        expect(response).to redirect_to("mailto:marcin@rubyjobs.pl")
+      end
+    end
   end
 end
 
