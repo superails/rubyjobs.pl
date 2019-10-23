@@ -17,4 +17,9 @@ trix-toolbar .trix-button-row {
   justify-content: space-between; 
 } 
 
+.trix-content a {
+  color: #e53e3e;
+  text-decoration: underline;
+}
+
 
