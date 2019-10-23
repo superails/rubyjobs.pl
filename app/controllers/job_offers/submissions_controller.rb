@@ -4,8 +4,15 @@ class JobOffers::SubmissionsController < ApplicationController
 
     session.delete(:job_offer_id)
 
-    JobOfferSubmitter.new(job_offer).call
-    flash[:notice] = "Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres #{job_offer.email}"
+    if current_user.admin?
+      JobOfferSubmitter.new(job_offer, with_email: false).call
+      JobOfferPublisher.new(job_offer).call
+      flash[:notice] = "Ogłoszenie zostało opublikowane."
+    else
+      JobOfferSubmitter.new(job_offer).call
+      flash[:notice] = "Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres #{job_offer.email}"
+    end
+
     redirect_to root_path
   end
 

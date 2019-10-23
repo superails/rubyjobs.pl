@@ -28,6 +28,39 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
 
       expect(ActionMailer::Base.deliveries.last.to).to eq ['marcin@rubyjobs.pl']
     end
+
+    context 'when submitted by admin user' do
+      before :each do
+        admin = create(:user, admin: true)
+        sign_in admin
+        job_offer = create(:job_offer,  email: 'marcin@rubyjobs.pl')
+        session[:job_offer_id] = job_offer.id
+      end
+      it 'does not send submit email to job offer creator' do
+
+        post :create
+
+        expect(ActionMailer::Base.deliveries.map(&:subject)).to_not include "Twoje ogłoszenie zostało dodane i czeka na publikację"
+      end
+
+      it 'sends publish email to job offer creator' do
+        post :create
+
+        expect(ActionMailer::Base.deliveries.map(&:subject)).to include "Twoje ogłoszenie zostało opublikowane"
+      end
+
+      it 'sets up submitted_at' do
+        post :create
+
+        expect(JobOffer.last.submitted_at).to_not be_nil
+      end
+
+      it 'sets up published_at' do
+        post :create
+
+        expect(JobOffer.last.published_at).to_not be_nil
+      end
+    end
   end
 
   describe 'DELETE #destroy' do
