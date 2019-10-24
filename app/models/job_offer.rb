@@ -13,7 +13,7 @@ class JobOffer < ApplicationRecord
   scope :active, -> { where(expired_at: nil) }
 
   validates :title, :locations, :salary, :apply_link, :email, presence: true
-  validates :email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
+  validate :emails_have_correct_format
 
   def city_names
     locations.reject{|location| location.name == 'Zdalnie'}.map(&:name).join(', ')
@@ -25,6 +25,10 @@ class JobOffer < ApplicationRecord
     end
 
     locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+  end
+
+  def emails
+    email.to_s.split(',').map(&:strip)
   end
 
   def remote
@@ -59,5 +63,11 @@ class JobOffer < ApplicationRecord
 
   def to_param
     [id, title.parameterize, company.name.parameterize].join('-')
+  end
+
+  private
+
+  def emails_have_correct_format
+    errors.add(:email, I18n.t('errors.messages.invalid')) if emails.any?{ |email| email !~ /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
   end
 end

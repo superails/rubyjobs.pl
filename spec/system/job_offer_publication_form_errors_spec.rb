@@ -12,7 +12,7 @@ RSpec.describe "Job offer publication form errors", :type => :system do
     fill_in :job_offer_apply_link, with: ""
 
     fill_in :job_offer_company_attributes_name, with: ""
-    fill_in :job_offer_email, with: ""
+    fill_in :job_offer_email, with: "invalidemail@"
 
     click_button "Dalej"
 

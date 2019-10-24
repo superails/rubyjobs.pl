@@ -60,6 +60,21 @@ RSpec.describe JobOffer, type: :model do
       expect(job_offer.validate).to eq false
     end
 
+    it 'validates when multiple emails seperated with comma' do
+      job_offer = build(:job_offer, email: 'marcin@rubyjobs.pl , job@rubyjobs.pl')
+
+      expect(job_offer.validate).to eq true
+    end
+
+    context 'when multiple emails' do
+      it 'does not validate untill all are in correct format' do
+        job_offer = build(:job_offer, email: 'marcin@rubyjobs , job@rubyjobs.pl')
+
+        expect(job_offer.validate).to eq false
+      end
+    end
+
+
     it 'validates when email is in correct format' do
       job_offer = build(:job_offer, email: 'marcin@rubyjob_offers.pl')
 
