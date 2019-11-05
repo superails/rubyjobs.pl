@@ -22,7 +22,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
-    attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+    attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
     fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
     click_button "Dalej"
@@ -45,7 +45,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
-    attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+    attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
     fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
     click_button "Dalej"
@@ -80,7 +80,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
-    attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+    attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
     fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
     click_button "Dalej"
@@ -109,7 +109,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
-    attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+    attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
     fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
     click_button "Dalej"
@@ -134,7 +134,7 @@ RSpec.describe "Job offer publication form", :type => :system do
       fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
       fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
-      attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+      attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
       fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
       click_button "Dalej"

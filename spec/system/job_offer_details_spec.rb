@@ -16,7 +16,7 @@ RSpec.describe "Job offer details", :type => :system do
     fill_in :job_offer_apply_link, with: "https://rubyjob_offers.pl/career/ruby_on_rails_developer"
 
     fill_in :job_offer_company_attributes_name, with: "rubyjob_offers i spółka"
-    attach_file :job_offer_company_attributes_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
+    attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
     fill_in :job_offer_email, with: "marcin@rubyjob_offers.pl"
 
     click_button "Dalej"

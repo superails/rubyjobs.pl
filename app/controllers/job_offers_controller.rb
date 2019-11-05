@@ -41,6 +41,6 @@ class JobOffersController < ApplicationController
   private
 
   def job_offer_params
-    params.require(:job_offer).permit(:title, :city_names, :remote, :salary, :salary_type, :description, :apply_link, :email, company_attributes: [:name, :logo])
+    params.require(:job_offer).permit(:title, :city_names, :remote, :salary, :salary_type, :description, :apply_link, :logo, :email, company_attributes: [:name])
   end
 end

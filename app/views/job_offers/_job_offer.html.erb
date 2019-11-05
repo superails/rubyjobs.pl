@@ -1,7 +1,11 @@
 <%= link_to job_offer do %>
   <div class="border border-gray-300 px-6 py-5 flex items-center mb-8">
     <div class="w-12 mr-6">
-      <%= image_tag(job_offer.company.logo) if job_offer.company.logo.attached? %>
+      <% if job_offer.logo.attached? %>
+        <%= image_tag(job_offer.logo) %>
+      <% elsif job_offer.company.logo.attached? %>
+        <%= image_tag(job_offer.company.logo) %>
+      <% end %>
     </div>
     <div class="w-full">
       <div class="flex justify-between">

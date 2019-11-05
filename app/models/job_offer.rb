@@ -5,6 +5,8 @@ class JobOffer < ApplicationRecord
   has_many :sites
   has_many :locations, through: :sites
 
+  has_one_attached :logo
+
   accepts_nested_attributes_for :company
 
   scope :published, -> { where.not(published_at: nil) }
