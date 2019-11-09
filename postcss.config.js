@@ -13,10 +13,10 @@ let environment = {
   ]
 }
 
-if (process.env.RAILS_ENV === "production") {
+if (process.env.RAILS_ENV === "development") {
   environment.plugins.push(
     require('@fullhuman/postcss-purgecss')({
-      content: ['./app/**/*.html.erb', './app/helpers/**/*.rb'],
+      content: ['./app/**/*.html.erb', './app/helpers/**/*.rb', './app/javascript/css/*.css'],
       defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
     })
   )
