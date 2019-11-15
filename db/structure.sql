@@ -442,6 +442,13 @@ CREATE INDEX index_job_offers_on_company_id ON public.job_offers USING btree (co
 
 
 --
+-- Name: index_job_offers_on_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_job_offers_on_token ON public.job_offers USING btree (token);
+
+
+--
 -- Name: index_sites_on_job_offer_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -523,6 +530,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191014214043'),
 ('20191018204013'),
 ('20191019113937'),
-('20191112205605');
+('20191112205605'),
+('20191115215947');
 
 
