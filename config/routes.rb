@@ -11,11 +11,12 @@ Rails.application.routes.draw do
 
   namespace :job_offers, path: 'jobs' do 
     resources :redirects, only: [:show]
-    resource :preview, only: [:show]
-    resource :summary, only: [:show]
-    resources :submissions, only: [:create, :destroy], param: :job_offer_id
-    resources :publications, only: [:create], param: :job_offer_id
+    resources :previews, only: [:show], param: :token
+    resources :summaries, only: [:show], param: :token
+    resources :submissions, only: [:create, :destroy], param: :token
+    resources :publications, only: [:create], param: :token
   end
 
-  resources :jobs, only: [:index, :show, :new, :create], controller: 'job_offers', as: 'job_offers'
+  resources :jobs, except: [:destroy, :show], controller: 'job_offers', as: 'job_offers', param: :token
+  resources :jobs, only: [:show], controller: 'job_offers', as: 'job_offers'
 end

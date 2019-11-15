@@ -14,27 +14,31 @@ class JobOffersController < ApplicationController
   end
 
   def new
-    if session[:job_offer_id]
-      old_job_offer = JobOffer.find(session[:job_offer_id])
-
-      @job_offer = old_job_offer.dup
-      @job_offer.city_names = old_job_offer.city_names
-      @job_offer.remote = old_job_offer.remote
-      @job_offer.company = old_job_offer.company
-    else
-      @job_offer = JobOffer.new
-      @job_offer.build_company
-    end
+    @job_offer = JobOffer.new
+    @job_offer.build_company
   end
 
   def create
     @job_offer = JobOffer.new(job_offer_params)
 
     if @job_offer.save
-      session[:job_offer_id] = @job_offer.id 
-      redirect_to job_offers_preview_path
+      redirect_to job_offers_preview_path(@job_offer.token)
     else
       render :new
+    end
+  end
+
+  def edit
+    @job_offer = JobOffer.find_by(token: params[:token])
+  end
+
+  def update
+    @job_offer = JobOffer.find_by(token: params[:token])
+
+    if @job_offer.update(job_offer_params)
+      redirect_to job_offers_preview_path(@job_offer.token)
+    else
+      render :edit
     end
   end
 

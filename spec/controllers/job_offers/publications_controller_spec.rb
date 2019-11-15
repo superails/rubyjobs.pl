@@ -5,7 +5,7 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
     it 'does not allow to perform action when not authorized' do
       job_offer = create(:job_offer, submitted_at: Time.zone.now)
 
-      expect { post :create, params: {job_offer_id: job_offer.id}}.to raise_error(Pundit::NotAuthorizedError)
+      expect { post :create, params: {token: job_offer.token}}.to raise_error(Pundit::NotAuthorizedError)
     end
 
     it 'sends email to job offer creator' do
@@ -14,7 +14,7 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
 
       job_offer = create(:job_offer, submitted_at: Time.zone.now, email: 'marcin@rubyjobs.pl')
 
-      post :create, params: {job_offer_id: job_offer.id}
+      post :create, params: {token: job_offer.token}
 
       expect(ActionMailer::Base.deliveries.last.to).to eq ['marcin@rubyjobs.pl']
     end
@@ -30,7 +30,7 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
         published_at: nil
       )
 
-      post :create, params: {job_offer_id: job_offer.id}
+      post :create, params: {token: job_offer.token}
 
       expect(job_offer.reload).to be_published
     end

@@ -145,12 +145,12 @@ RSpec.describe "Job offer publication form", :type => :system do
       expect(page).to have_field('job_offer_title', with: 'Ruby on Rails Developer')
       expect(page).to have_select('job_offer_salary_type', selected: 'Umowa o pracę')
 
-      fill_in :job_offer_title, with: "Senior Ruby on Rails Developer"
+      fill_in :job_offer_title, with: "Junior Ruby on Rails Developer"
       uncheck :job_offer_remote
 
       click_button "Dalej"
 
-      expect(page).to have_text('Senior Ruby on Rails Developer')
+      expect(page).to have_text('Junior Ruby on Rails Developer')
       expect(page).to_not have_text('Zdalnie')
     end
   end

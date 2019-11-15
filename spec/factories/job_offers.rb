@@ -9,5 +9,6 @@ FactoryBot.define do
     email { "marcin@rubyjobs.pl" }
     remote { "1" }
     city_names { "Warszawa, Białystok" }
+    token { "123" }
   end
 end

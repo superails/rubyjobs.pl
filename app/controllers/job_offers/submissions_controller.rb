@@ -1,8 +1,6 @@
 class JobOffers::SubmissionsController < ApplicationController
   def create
-    job_offer = JobOffer.find(session[:job_offer_id])
-
-    session.delete(:job_offer_id)
+    job_offer = JobOffer.find_by(token: params[:token])
 
     if current_user.admin?
       JobOfferSubmitter.new(job_offer, with_email: false).call
@@ -17,7 +15,7 @@ class JobOffers::SubmissionsController < ApplicationController
   end
 
   def destroy
-    @job_offer = JobOffer.find(params[:job_offer_id])
+    @job_offer = JobOffer.find_by(token: params[:token])
     authorize @job_offer
 
     @job_offer.update(submitted_at: nil)

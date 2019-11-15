@@ -63,47 +63,11 @@ RSpec.describe JobOffersController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
-    context 'when job_offer_id saved in session' do
-      it 'assigns copy of JobOffer with job_offer_id from session to @job_offer' do
-        current_job_offer = create(:job_offer, 
-                             title: 'Senior Ruby on Rails developer',
-                             city_names: "Warszawa, Białystok",
-                             remote: '1')
-        session[:job_offer_id] = current_job_offer.id
-
-        get :new
-
-        expect(assigns(:job_offer).title).to eq 'Senior Ruby on Rails developer'
-        expect(assigns(:job_offer).city_names).to eq 'Warszawa, Białystok'
-        expect(assigns(:job_offer).company.name).to eq current_job_offer.company.name
-        expect(assigns(:job_offer).remote).to eq '1'
-      end
-    end
-  end
-
   describe 'POST #create' do
-    context 'when job_offer_id saved in session' do
-      it 'destroys JobOffer with id saved in session' do
-        current_job_offer = create(:job_offer)
-        session[:job_offer_id] = current_job_offer.id
-
-        post :create, params: {job_offer: attributes_for(:job_offer).merge({company_attributes: attributes_for(:company)})}
-
-        expect(session[:job_offer_id]).to_not eq current_job_offer.id
-      end
-    end
-
     it 'creates new JobOffer record' do
       post :create, params: {job_offer: attributes_for(:job_offer, title: 'Senior Ruby on Rails Developer').merge({company_attributes: attributes_for(:company)})}
 
       expect(JobOffer.last.title).to eq 'Senior Ruby on Rails Developer'
-    end
-
-    it 'saves new JobOffer record\'s id in session' do
-      post :create, params: {job_offer: attributes_for(:job_offer, title: 'Senior Ruby on Rails Developer').merge({company_attributes: attributes_for(:company)})}
-
-      expect(session[:job_offer_id]).to eq JobOffer.last.id
     end
 
     context 'when invalid job offer params' do
@@ -124,6 +88,34 @@ RSpec.describe JobOffersController, type: :controller do
         }
 
         expect(JobOffer.last.company).to eq company
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    it 'updates existing JobOffer record' do
+      job_offer = create(:job_offer, title: 'RoR Developer')
+
+      patch :update, params: {token: job_offer.token, job_offer: {title: 'Junior RoR Developer'}}
+
+      expect(job_offer.reload.title).to eq 'Junior RoR Developer'
+    end
+
+    it 'redirects to preview page' do
+      job_offer = create(:job_offer, title: 'RoR Developer')
+
+      patch :update, params: {token: job_offer.token, job_offer: {title: 'Junior RoR Developer'}}
+
+      expect(response).to redirect_to(job_offers_preview_path(job_offer.token))
+    end
+
+    context 'when invalid job offer params' do
+      it 'rerenders #edit view' do
+        job_offer = create(:job_offer, title: 'RoR Developer')
+
+        patch :update, params: {token: job_offer.token, job_offer: {title: ''}}
+
+        expect(response).to render_template(:edit)
       end
     end
   end

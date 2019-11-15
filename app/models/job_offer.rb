@@ -17,6 +17,8 @@ class JobOffer < ApplicationRecord
   validates :title, :locations, :salary, :apply_link, :email, presence: true
   validate :emails_have_correct_format
 
+  before_create :generate_token
+
   def city_names
     locations.reject{|location| location.name == 'Zdalnie'}.map(&:name).join(', ')
   end
@@ -38,7 +40,13 @@ class JobOffer < ApplicationRecord
   end
 
   def remote=(value)
-    locations << Location.find_or_initialize_by(name: 'Zdalnie') if value == "1"
+    if value == "1"
+      locations << Location.find_or_initialize_by(name: 'Zdalnie') if value == "1"
+    elsif value == "0" && remote_location = Location.find_by(name: 'Zdalnie')
+      locations.destroy(remote_location)
+    end
+
+    
   end
 
   def company_attributes=(attributes)
@@ -65,6 +73,13 @@ class JobOffer < ApplicationRecord
 
   def to_param
     [id, title.parameterize, company.name.parameterize].join('-')
+  end
+
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless JobOffer.exists?(token: random_token)
+    end
   end
 
   private

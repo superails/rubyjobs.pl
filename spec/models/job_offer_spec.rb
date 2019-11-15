@@ -82,6 +82,15 @@ RSpec.describe JobOffer, type: :model do
     end
   end
 
+  describe 'callbacks' do
+    it 'generates random token on save' do
+      job_offer = create(:job_offer)
+
+      expect(job_offer.token).to_not be_nil
+    end
+
+  end
+
   describe '#remote=' do
     context 'when remote location exists in database' do 
       it 'assigns existing remote location when remote checkbox is checked' do
@@ -108,6 +117,15 @@ RSpec.describe JobOffer, type: :model do
 
     it 'does not build remote location when remote checkbox is unchecked' do
       job_offer = JobOffer.new
+
+      job_offer.remote = "0"
+
+      expect(job_offer.locations.map(&:name)).to_not include('Zdalnie')
+    end
+
+    it 'removes remote location when remote checkbox is unchecked' do
+      job_offer = JobOffer.new
+      job_offer.locations << Location.create(name: 'Zdalnie')
 
       job_offer.remote = "0"
 

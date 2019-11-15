@@ -1,6 +1,6 @@
 class JobOffers::PreviewsController < ApplicationController
   def show
-    @job_offer = JobOffer.find(session[:job_offer_id]).decorate
+    @job_offer = JobOffer.find_by(token: params[:token]).decorate
   end
 end
 

@@ -11,7 +11,7 @@ class JobOffers::PublicationsController < ApplicationController
   private
 
   def find_job_offer
-    @job_offer = JobOffer.find(params[:job_offer_id])
+    @job_offer = JobOffer.find_by(token: params[:token])
   end
 
   def authorize_job_offer
