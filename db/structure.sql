@@ -425,13 +425,6 @@ CREATE INDEX index_job_offers_on_company_id ON public.job_offers USING btree (co
 
 
 --
--- Name: index_job_offers_on_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_job_offers_on_token ON public.job_offers USING btree (token);
-
-
---
 -- Name: index_sites_on_job_offer_id; Type: INDEX; Schema: public; Owner: -
 --
 
