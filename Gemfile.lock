@@ -92,6 +92,8 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
+    data_migrate (6.0.5)
+      rails (>= 5.0)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -315,6 +317,7 @@ DEPENDENCIES
   capistrano-sidekiq
   capistrano3-puma
   capybara
+  data_migrate
   devise
   draper
   factory_bot_rails

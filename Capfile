@@ -9,6 +9,7 @@ require 'capistrano/puma'
 require 'capistrano/scm/git'
 require "whenever/capistrano"
 require 'capistrano/sidekiq'
+require 'capistrano/data_migrate'
 
 install_plugin Capistrano::Puma
 install_plugin Capistrano::SCM::Git
