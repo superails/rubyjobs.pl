@@ -153,7 +153,8 @@ CREATE TABLE public.job_offers (
     expired_at timestamp without time zone,
     visits_count integer DEFAULT 0,
     apply_link_clicks_count integer DEFAULT 0,
-    token character varying
+    token character varying,
+    state character varying
 );
 
 
@@ -531,6 +532,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191018204013'),
 ('20191019113937'),
 ('20191112205605'),
-('20191115215947');
+('20191115215947'),
+('20191118202800');
 
 

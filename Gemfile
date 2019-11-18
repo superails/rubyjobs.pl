@@ -21,6 +21,7 @@ gem 'trix-rails', require: 'trix'
 gem 'whenever', require: false
 gem 'sidekiq', '~> 5'
 gem 'data_migrate'
+gem 'aasm'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

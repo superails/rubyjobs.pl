@@ -13,11 +13,11 @@ RSpec.describe "Job offer details", :type => :system do
     fill_in :job_offer_salary, with: "11000 - 18000"
     select "B2B", from: :job_offer_salary_type
     find('trix-editor').click.set('Praca dla programisty Ruby on Rails, minimum 2 lata doświadczenia.')
-    fill_in :job_offer_apply_link, with: "https://rubyjob_offers.pl/career/ruby_on_rails_developer"
+    fill_in :job_offer_apply_link, with: "https://rubyjobs.pl/career/ruby_on_rails_developer"
 
-    fill_in :job_offer_company_attributes_name, with: "rubyjob_offers i spółka"
+    fill_in :job_offer_company_attributes_name, with: "rubyjobs i spółka"
     attach_file :job_offer_logo, "#{Rails.root}/spec/fixtures/files/logo.png"
-    fill_in :job_offer_email, with: "marcin@rubyjob_offers.pl"
+    fill_in :job_offer_email, with: "marcin@rubyjobs.pl"
 
     click_button "Dalej"
     click_link "Dalej"
@@ -33,7 +33,7 @@ RSpec.describe "Job offer details", :type => :system do
     visit "/"
     click_link "Ruby on Rails Developer"
 
-    expect(page).to have_text("rubyjob_offers i spółka")
+    expect(page).to have_text("rubyjobs i spółka")
     expect(page).to have_text("Ruby on Rails Developer")
     expect(page).to have_text("Zdalnie")
     expect(page).to have_text("Warszawa")

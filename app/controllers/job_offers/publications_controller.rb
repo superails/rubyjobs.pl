@@ -3,7 +3,7 @@ class JobOffers::PublicationsController < ApplicationController
   before_action :authorize_job_offer
 
   def create
-    JobOfferPublisher.new(@job_offer).call
+    @job_offer.publish!
 
     redirect_back(fallback_location: root_path)
   end

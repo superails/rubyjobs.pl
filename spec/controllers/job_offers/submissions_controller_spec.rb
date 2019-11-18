@@ -62,11 +62,12 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
       admin = create(:user, admin: true)
       sign_in admin
 
-      job_offer = create(:job_offer, submitted_at: Time.zone.now)
+      job_offer = create(:job_offer, state: 'submitted', submitted_at: Time.zone.now)
 
       delete :destroy, params: {token: job_offer.token}
 
       expect(job_offer.reload).to_not be_submitted
+      expect(job_offer.reload.submitted_at).to be_nil
     end
   end
 

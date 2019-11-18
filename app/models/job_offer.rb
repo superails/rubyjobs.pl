@@ -1,23 +1,45 @@
 class JobOffer < ApplicationRecord
+  include AASM
+
   DEFAULT_EXPIRATION_TIME = 30.days
 
   belongs_to :company
   has_many :sites
   has_many :locations, through: :sites
 
+  scope :active, -> { where("state != 'expired' AND state != 'created'") }
+
   has_one_attached :logo
 
   accepts_nested_attributes_for :company
-
-  scope :published, -> { where.not(published_at: nil) }
-  scope :unpublished, -> { where(published_at: nil) }
-  scope :submitted, -> { where.not(submitted_at: nil) }
-  scope :active, -> { where(expired_at: nil) }
 
   validates :title, :locations, :salary, :apply_link, :email, presence: true
   validate :emails_have_correct_format
 
   before_create :generate_token
+
+  aasm column: 'state' do
+    state :created, initial: true
+    state :submitted
+    state :published
+    state :expired
+
+    event :submit do
+      transitions from: :created, to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
+    end
+
+    event :publish  do
+      transitions from: [:created, :submitted], to: :published, success: -> { JobOfferPublisher.new(self).call } 
+    end
+
+    event :expire do
+      transitions from: :published, to: :expired
+    end
+
+    event :reject do
+      transitions from: :submitted, to: :created, success: -> { update(submitted_at: nil) } 
+    end
+  end
 
   def city_names
     locations.reject{|location| location.name == 'Zdalnie'}.map(&:name).join(', ')
@@ -45,8 +67,6 @@ class JobOffer < ApplicationRecord
     elsif value == "0" && remote_location = Location.find_by(name: 'Zdalnie')
       locations.destroy(remote_location)
     end
-
-    
   end
 
   def company_attributes=(attributes)
@@ -57,18 +77,6 @@ class JobOffer < ApplicationRecord
 
   def expiration_time
     (created_at + DEFAULT_EXPIRATION_TIME).strftime("%d.%m.%Y")
-  end
-
-  def published?
-    !!published_at
-  end
-
-  def unpublished?
-    !published_at
-  end
-
-  def submitted?
-    !!submitted_at
   end
 
   def to_param

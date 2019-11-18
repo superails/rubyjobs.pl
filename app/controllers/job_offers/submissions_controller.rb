@@ -3,11 +3,12 @@ class JobOffers::SubmissionsController < ApplicationController
     job_offer = JobOffer.find_by(token: params[:token])
 
     if current_user.admin?
-      JobOfferSubmitter.new(job_offer, with_email: false).call
-      JobOfferPublisher.new(job_offer).call
+      job_offer.publish!
+
       flash[:notice] = "Ogłoszenie zostało opublikowane."
     else
-      JobOfferSubmitter.new(job_offer).call
+      job_offer.submit!
+
       flash[:notice] = "Ogłoszenie czeka na akceptację. Po akceptacji otrzymasz maila na adres #{job_offer.email}"
     end
 
@@ -18,7 +19,7 @@ class JobOffers::SubmissionsController < ApplicationController
     @job_offer = JobOffer.find_by(token: params[:token])
     authorize @job_offer
 
-    @job_offer.update(submitted_at: nil)
+    @job_offer.reject!
     redirect_back(fallback_location: root_path)
   end
 end

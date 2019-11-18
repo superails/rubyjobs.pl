@@ -12,7 +12,7 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
       admin = create(:user, admin: true)
       sign_in admin
 
-      job_offer = create(:job_offer, submitted_at: Time.zone.now, email: 'marcin@rubyjobs.pl')
+      job_offer = create(:job_offer, state: 'submitted', submitted_at: Time.zone.now, email: 'marcin@rubyjobs.pl')
 
       post :create, params: {token: job_offer.token}
 
@@ -25,6 +25,7 @@ RSpec.describe JobOffers::PublicationsController, type: :controller do
 
       job_offer = create(
         :job_offer, 
+        state: 'submitted',
         submitted_at: Time.zone.now, 
         email: 'marcin@rubyjobs.pl',
         published_at: nil

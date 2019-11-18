@@ -10,5 +10,6 @@ FactoryBot.define do
     remote { "1" }
     city_names { "Warszawa, Białystok" }
     token { "123" }
+    state { "created" }
   end
 end

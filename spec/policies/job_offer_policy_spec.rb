@@ -5,9 +5,9 @@ RSpec.describe JobOfferPolicy, type: :policy do
 
   let(:admin) {create(:user, admin: true)}
   let(:not_admin) {create(:user, admin: false)}
-  let(:published_job_offer) {create(:job_offer, published_at: Time.zone.now)}
-  let(:unpublished_job_offer) {create(:job_offer, submitted_at: Time.zone.now, published_at: nil)}
-  let(:unsubmitted_job_offer) {create(:job_offer, submitted_at: nil, published_at: Time.zone.now)}
+  let(:published_job_offer) {create(:job_offer, state: 'published', published_at: Time.zone.now)}
+  let(:unpublished_job_offer) {create(:job_offer, state: 'submitted', submitted_at: Time.zone.now, published_at: nil)}
+  let(:unsubmitted_job_offer) {create(:job_offer, state: 'published', submitted_at: nil, published_at: Time.zone.now)}
 
 
   permissions :create?, :destroy? do

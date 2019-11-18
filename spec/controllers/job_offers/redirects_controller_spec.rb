@@ -12,7 +12,7 @@ RSpec.describe JobOffers::RedirectsController, type: :controller do
 
     context 'when job_offer is published' do
       it 'enqueues RegisterApplyLinkClickJob' do
-        job_offer = create(:job_offer, published_at: Time.zone.now, apply_link: 'https://rubyjobs.pl/careers/ruby-developer')
+        job_offer = create(:job_offer, state: 'published', published_at: Time.zone.now, apply_link: 'https://rubyjobs.pl/careers/ruby-developer')
 
         expect { get :show, params: {id: job_offer.id} }.to have_enqueued_job(RegisterApplyLinkClickJob).with(job_offer.id)
       end

@@ -7,6 +7,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         create(
           :job_offer, 
           title: "RoR Developer", 
+          state: 'published',
           submitted_at: Time.zone.now - 2.day,
           published_at: Time.zone.now - 1.day
         )
@@ -25,6 +26,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         create(
           :job_offer, 
           title: "RoR Developer", 
+          state: 'published',
           submitted_at: Time.zone.now - 2.day,
           published_at: Time.zone.now - 1.day
         )
@@ -46,6 +48,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         create(
           :job_offer, 
           title: "RoR Developer", 
+          state: 'submitted',
           submitted_at: Time.zone.now - 2.day,
           published_at: nil
         )
@@ -64,6 +67,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         create(
           :job_offer, 
           title: "RoR Developer", 
+          state: 'submitted',
           submitted_at: Time.zone.now - 2.day,
           published_at: nil
         )
