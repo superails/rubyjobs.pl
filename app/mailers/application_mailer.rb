@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'mdoliwa@gmail.com', reply_to: 'mdoliwa@gmail.com'
+  default from: 'marcin@rubyjobs.pl', reply_to: 'marcin@rubyjobs.pl'
   layout 'mailer'
 end
