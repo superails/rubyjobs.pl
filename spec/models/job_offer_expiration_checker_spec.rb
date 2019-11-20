@@ -4,12 +4,14 @@ RSpec.describe JobOfferExpirationChecker, type: :model do
   describe '#call' do
     it 'sends email to all expired job offers' do
       create(:job_offer, 
+             state: 'published',
              published_at: Time.zone.now - 31.days,
              submitted_at: Time.zone.now - 32.days,
              email: 'marcin1@rubyjobs.pl'
             )
 
       create(:job_offer, 
+             state: 'published',
              published_at: Time.zone.now - 29.days,
              submitted_at: Time.zone.now - 28.days,
              email: 'marcin2@rubyjobs.pl'
@@ -22,6 +24,7 @@ RSpec.describe JobOfferExpirationChecker, type: :model do
 
     it 'sets expired_at to current time' do
       job_offer1 = create(:job_offer, 
+             state: 'published',
              published_at: Time.zone.now - 31.days,
              submitted_at: Time.zone.now - 32.days,
              email: 'marcin1@rubyjobs.pl',
@@ -29,6 +32,7 @@ RSpec.describe JobOfferExpirationChecker, type: :model do
             )
 
       job_offer2 = create(:job_offer, 
+             state: 'published',
              published_at: Time.zone.now - 29.days,
              submitted_at: Time.zone.now - 28.days,
              email: 'marcin2@rubyjobs.pl',
@@ -41,8 +45,9 @@ RSpec.describe JobOfferExpirationChecker, type: :model do
       expect(job_offer2.reload.expired_at).to be_nil
     end
 
-    it 'does not send email when expired_at is not empty' do
+    it 'does not send email when job is in expired state' do
       job_offer1 = create(:job_offer, 
+                          state: 'published',
                           published_at: Time.zone.now - 31.days,
                           submitted_at: Time.zone.now - 32.days,
                           email: 'marcin1@rubyjobs.pl',
@@ -50,6 +55,7 @@ RSpec.describe JobOfferExpirationChecker, type: :model do
                          )
 
       job_offer2 = create(:job_offer, 
+                          state: 'expired',
                           published_at: Time.zone.now - 31.days,
                           submitted_at: Time.zone.now - 32.days,
                           email: 'marcin2@rubyjobs.pl',
