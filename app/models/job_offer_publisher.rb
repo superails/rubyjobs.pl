@@ -8,11 +8,10 @@ class JobOfferPublisher
   def call
     current_time = Time.zone.now
 
-    if job_offer.submitted_at
-      job_offer.update(published_at: current_time)
-    else
-      job_offer.update(published_at: current_time, submitted_at: current_time)
-    end
+    job_offer.update(published_at: current_time,
+                     visits_count: 0,
+                     apply_link_clicks_count: 0,
+                     submitted_at: job_offer.submitted_at ? job_offer.submitted_at : current_time)
 
     JobOfferMailer.with(id: job_offer.id).publish.deliver_later
   end

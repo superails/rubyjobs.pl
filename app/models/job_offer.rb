@@ -25,11 +25,11 @@ class JobOffer < ApplicationRecord
     state :expired
 
     event :submit do
-      transitions from: :created, to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
+      transitions from: [:created, :expired], to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
     end
 
     event :publish  do
-      transitions from: [:created, :submitted], to: :published, success: -> { JobOfferPublisher.new(self).call } 
+      transitions from: [:created, :submitted, :expired], to: :published, success: -> { JobOfferPublisher.new(self).call } 
     end
 
     event :expire do
@@ -75,10 +75,6 @@ class JobOffer < ApplicationRecord
     end
   end
 
-  def expiration_time
-    (created_at + DEFAULT_EXPIRATION_TIME).strftime("%d.%m.%Y")
-  end
-
   def to_param
     [id, title.parameterize, company.name.parameterize].join('-')
   end
@@ -88,6 +84,11 @@ class JobOffer < ApplicationRecord
       random_token = SecureRandom.urlsafe_base64(nil, false)
       break random_token unless JobOffer.exists?(token: random_token)
     end
+  end
+
+  def expiration_time_in_days
+    duration_parts = ActiveSupport::Duration.build(DEFAULT_EXPIRATION_TIME).parts
+    duration_parts[:weeks].to_i * 7 + duration_parts[:days]
   end
 
   private

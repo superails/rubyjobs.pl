@@ -24,7 +24,7 @@
   <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Informacje dodatkowe</h2>
   <div class="mb-8">
     <ul class="list-disc">
-      <li class="ml-4">Ogłoszenie będzie aktywne do <%= @job_offer.expiration_time %></li>
+      <li class="ml-4">Ogłoszenie będzie aktywne przez <%= @job_offer.expiration_time_in_days %> dni.</li>
       <li class="ml-4">Informacje o zakończeniu wyświetlania ogłoszenia otrzymasz na adres: <%= @job_offer.email %></li>
     </ul>
   </div>
