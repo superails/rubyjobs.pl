@@ -93,6 +93,10 @@ class JobOffer < ApplicationRecord
     duration_parts[:weeks].to_i * 7 + duration_parts[:days]
   end
 
+  def logo_attached?
+    logo.attached? || company.logo.attached?
+  end
+
   private
 
   def emails_have_correct_format

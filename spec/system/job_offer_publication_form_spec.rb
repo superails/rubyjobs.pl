@@ -144,6 +144,7 @@ RSpec.describe "Job offer publication form", :type => :system do
 
       expect(page).to have_field('job_offer_title', with: 'Ruby on Rails Developer')
       expect(page).to have_select('job_offer_salary_type', selected: 'Umowa o pracę')
+      expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
 
       fill_in :job_offer_title, with: "Junior Ruby on Rails Developer"
       uncheck :job_offer_remote
