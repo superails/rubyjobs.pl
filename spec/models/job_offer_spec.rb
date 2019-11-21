@@ -153,5 +153,14 @@ RSpec.describe JobOffer, type: :model do
 
       expect(job_offer.locations.map(&:persisted?)).to eq [true, false]
     end
+
+    it 'does not double assign the same location' do
+      job_offer = JobOffer.new
+
+      job_offer.city_names = "Warszawa"
+      job_offer.city_names = "Warszawa"
+
+      expect(job_offer.locations.map(&:name)).to eq ["Warszawa"]
+    end
   end
 end

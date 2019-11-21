@@ -50,7 +50,9 @@ class JobOffer < ApplicationRecord
       {name: city_name}
     end
 
-    locations << location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+    self.locations = (
+      locations + location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+    ).uniq(&:name)
   end
 
   def emails
