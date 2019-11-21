@@ -2,7 +2,7 @@ class JobOfferDecorator < Draper::Decorator
   delegate_all
 
   def location_names
-    locations.pluck(:name).join(', ')
+    locations.map(&:name).sort_by{|name| name == 'Zdalnie' ? '' : name}.join(', ')
   end
 
   def time_since_publication
