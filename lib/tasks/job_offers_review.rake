@@ -7,7 +7,7 @@ namespace :job_offers_review do
       sort_by{|location| location.name == 'Zdalnie' ? -Float::INFINITY : -location.job_offers.count}.
       each do |location|
         puts "[#{location.name}]"
-        location.job_offers.published.decorate.each do |job_offer|
+        location.job_offers.published.decorate.sort_by{|job_offer| job_offer.salary.to_i}.each do |job_offer|
           begin
             url = Rails.application.routes.url_helpers.job_offer_url(job_offer, host: 'https://rubyjobs.pl')
             bitly_url = RestClient.get( "https://api-ssl.bitly.com/v3/shorten?longUrl=#{CGI.escape(url)}&access_token=#{Rails.application.credentials.bitly[:access_token]}&format=txt")
