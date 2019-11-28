@@ -7,7 +7,7 @@ class JobOfferSubmitter
   end
 
   def call
-    job_offer.update(submitted_at: Time.zone.now)
+    job_offer.update(submitted_at: Time.zone.now, published_at: nil)
 
     JobOfferMailer.with(id: job_offer.id).submit.deliver_later if with_email
   end
