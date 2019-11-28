@@ -4,7 +4,7 @@ class JobOffer < ApplicationRecord
   DEFAULT_EXPIRATION_TIME = 30.days
 
   belongs_to :company
-  has_many :sites
+  has_many :sites, dependent: :destroy 
   has_many :locations, through: :sites
 
   scope :active, -> { where("state != 'expired' AND state != 'created'") }
