@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe "Job offer search", :type => :system do
   it 'shows job offers with search term in location, title or description' do
     create(:job_offer, state: 'published', city_names: 'Warszawa, Białystok', remote: '1', title: 'Junior RoR Dev')
-    create(:job_offer, state: 'published', city_names: 'Warszawa', title: 'RoR Dev (zdalnie)')
-    create(:job_offer, state: 'published', city_names: 'Warszawa', title: 'Senior RoR Dev', description: 'Pracuj zdalnie')
+    create(:job_offer, state: 'published', city_names: 'Warszawa', remote: '0', title: 'RoR Dev (zdalnie)')
+    create(:job_offer, state: 'published', city_names: 'Warszawa', remote: '0', title: 'Senior RoR Dev', description: 'Pracuj zdalnie')
     create(:job_offer, state: 'published', city_names: 'Warszawa', title: 'Elixir Dev', remote: '0')
 
     visit "/"

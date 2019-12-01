@@ -10,7 +10,8 @@ class JobOffersController < ApplicationController
         joins(:locations).
         group('job_offers.id')
 
-      @job_offers = JobOffer.from(job_offers_with_location_names, :job_offers).where("to_tsvector('simple', location_names) @@ #{tsquery}")
+      @job_offers = JobOffer.from(job_offers_with_location_names, :job_offers).
+        where("to_tsvector('simple', location_names || title || description) @@ #{tsquery}")
     end
 
     @job_offers = 
