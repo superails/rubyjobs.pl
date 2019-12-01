@@ -1,10 +1,27 @@
 class JobOffersController < ApplicationController
   def index
-    if current_user.admin?
-      @job_offers = JobOffer.active.order('published_at DESC, submitted_at DESC').decorate
-    else
-      @job_offers = JobOffer.active.published.order('published_at DESC').includes(:locations, :company).decorate
+    @job_offers = JobOffer.all
+
+    if params[:q]
+      tsquery = "to_tsquery('simple', '#{params[:q].split(/\s+/).join(' & ')}')"
+
+      job_offers_with_location_names = JobOffer.
+        select("job_offers.*, string_agg(locations.name, ', ') AS location_names").
+        joins(:locations).
+        group('job_offers.id')
+
+      @job_offers = JobOffer.from(job_offers_with_location_names, :job_offers).where("to_tsvector('simple', location_names) @@ #{tsquery}")
     end
+
+    @job_offers = 
+      if current_user.admin?
+        @job_offers.active.order('published_at DESC, submitted_at DESC')
+      else
+        @job_offers.published.order('published_at DESC').includes(:locations, :company)
+      end
+
+
+    @job_offers = @job_offers.decorate
   end
 
   def show

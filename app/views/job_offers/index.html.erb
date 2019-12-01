@@ -1,8 +1,15 @@
 <div class="pb-10 mt-8 px-4 mb-10">
   <div class="container mx-auto text-center">
     <h1 class="text-5xl font-bold text-red-800 font-serif"><%= link_to "RubyJobs.pl", root_path%></h1>
-    <h2 class="text-xl mb-10 text-gray-800">Ogłoszenia pracy dla programistów Rubiego</h2>
-    <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "bg-red-600 text-white font-bold px-6 py-3 inline-block rounded" %>
+    <h2 class="text-xl mb-16 text-gray-800">Ogłoszenia pracy dla programistów Rubiego</h2>
+    <div class="max-w-3xl m-auto px-4 mb-4">
+      <%= form_with url: job_offers_path, method: :get, class: 'w-full flex items-center', local: true do |form| %>
+        <%= form.text_field :q, class: "border border-gray-300 px-4 py-4 w-full text-xl", placeholder: "Szukaj w ogłoszeniach" %>
+        <div class="bg-red-600 self-stretch flex flex-column items-center">
+          <%= form.submit "Szukaj", class: "bg-red-600 text-white block px-8 text-xl font-bold" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 

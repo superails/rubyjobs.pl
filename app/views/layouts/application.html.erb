@@ -25,6 +25,18 @@
       </div>
     <% end %>
 
+    <div class="container mx-auto flex mt-4 justify-between items-center px-4">
+      <%= link_to root_path do %>
+        <div class="flex">
+          <div class="font-bold text-red-800 border-2 border-red-800 px-2 py-1 mr-3">RJ</div>
+          <div class="text-2xl text-red-800 font-bold">RubyJobs.pl</div>
+        </div>
+      <% end %>
+      <div>
+        <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "bg-red-600 text-white font-bold px-6 py-3 inline-block rounded" %>
+      </div>
+    </div>
+
     <%= yield %>
   </body>
 </html>
