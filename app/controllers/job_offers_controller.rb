@@ -2,7 +2,7 @@ class JobOffersController < ApplicationController
   def index
     @job_offers = JobOffer.all
 
-    if params[:q]
+    if params[:q].present?
       tsquery = "to_tsquery('simple', '#{params[:q].split(/\s+/).join(' & ')}')"
 
       job_offers_with_location_names = JobOffer.

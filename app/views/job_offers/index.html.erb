@@ -14,5 +14,9 @@
 </div>
 
 <div class="container m-auto max-w-3xl px-4">
-  <%= render @job_offers %>
+  <% if @job_offers.present? %>
+    <%= render @job_offers %>
+  <% else %>
+    <p class="text-2xl italic text-gray-600">Brak wyników dla zadanego kryterium wyszukiwania.</p>
+  <% end %>
 </div>
