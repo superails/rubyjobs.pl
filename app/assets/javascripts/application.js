@@ -25,4 +25,18 @@
         flashMessageBox.remove();
       }
     }
+
+    var menuButton = document.getElementById("menu-button");
+
+    if (menuButton) {
+      menuButton.onclick = function() {
+        var menuContent = document.getElementById("menu-container");
+        if (menuContent.classList.contains('hidden')) {
+          menuContent.classList.add('md:hidden');
+          menuContent.classList.remove('hidden');
+        } else {
+          menuContent.classList.add('hidden');
+        }
+      }
+    }
   });
