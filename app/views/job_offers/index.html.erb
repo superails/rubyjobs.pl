@@ -4,7 +4,7 @@
     <h2 class="text-xl mb-16 text-gray-800">Ogłoszenia pracy dla programistów Rubiego</h2>
     <div class="max-w-3xl m-auto px-4 mb-4">
       <%= form_with url: job_offers_path, method: :get, class: 'w-full flex items-center', local: true do |form| %>
-        <%= form.text_field :q, class: "border border-gray-300 px-4 py-4 w-full text-xl", value: params[:q], placeholder: "Szukaj w ogłoszeniach" %>
+        <%= form.text_field :q, class: "border border-gray-300 px-4 py-4 w-full text-xl", value: params[:q] %>
         <div class="bg-red-600 self-stretch flex flex-column items-center">
           <%= button_tag do %>
             <span class="bg-red-600 text-white px-8 text-xl font-bold hidden md:block">Szukaj</span>
