@@ -64,8 +64,8 @@ class JobOffer < ApplicationRecord
   end
 
   def remote=(value)
-    if value == "1"
-      locations << Location.find_or_initialize_by(name: 'Zdalnie') if value == "1"
+    if value == "1" 
+      locations << Location.find_or_initialize_by(name: 'Zdalnie') unless locations.find{|location| location.name == 'Zdalnie'}
     elsif value == "0" && remote_location = Location.find_by(name: 'Zdalnie')
       locations.destroy(remote_location)
     end

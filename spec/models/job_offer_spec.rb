@@ -131,6 +131,14 @@ RSpec.describe JobOffer, type: :model do
 
       expect(job_offer.locations.map(&:name)).to_not include('Zdalnie')
     end
+
+    it 'does not duplicate remote location when called multiple times' do
+      job_offer = JobOffer.new
+      job_offer.remote = "1"
+      job_offer.remote = "1"
+
+      expect(job_offer.locations.map(&:name)).to eq ['Zdalnie']
+    end
   end
 
   describe "#city_names=" do

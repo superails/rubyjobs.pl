@@ -13,7 +13,7 @@ RSpec.describe "Job offer search", :type => :system do
 
     expect(page).to have_text 'Junior RoR Dev'
     expect(page).to have_text 'RoR Dev (zdalnie)'
-    expect(page).to have_text 'Senior RoR Dev'
+    expect(page).to_not have_text 'Senior RoR Dev'
     expect(page).to_not have_text 'Elixir Dev'
   end
 end
