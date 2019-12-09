@@ -4,7 +4,7 @@ namespace :job_offers_review do
     Location.
       includes(:job_offers).
       where(job_offers: {state: 'published'}).
-      sort_by{|location| location.name == 'Zdalnie' ? -Float::INFINITY : -location.job_offers.count}.
+      sort_by{|location| location.name == 'Zdalnie' ? -Float::INFINITY : -location.job_offers.published.count}.
       each do |location|
         puts "[#{location.name}]"
         location.job_offers.published.decorate.sort_by{|job_offer| job_offer.salary.to_i}.each do |job_offer|
