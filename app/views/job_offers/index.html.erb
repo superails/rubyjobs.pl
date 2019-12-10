@@ -7,7 +7,7 @@
 
 <div class="container m-auto max-w-3xl px-4 mb-24">
   <%= form_with url: job_offers_path, method: :get, class: 'w-full flex items-center', local: true do |form| %>
-    <%= form.text_field :q, class: "border border-gray-300 px-4 py-4 w-full text-xl", value: params[:q] %>
+    <%= form.text_field :q, class: "border border-gray-300 px-4 py-4 w-full text-xl", value: params[:q], autofocus: true %>
     <div class="bg-red-600 self-stretch flex flex-column items-center">
       <%= button_tag do %>
         <span class="bg-red-600 text-white px-8 text-xl font-bold hidden md:block">Szukaj</span>
