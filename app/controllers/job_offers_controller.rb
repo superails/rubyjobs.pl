@@ -4,12 +4,13 @@ class JobOffersController < ApplicationController
 
     if params[:q].present?
       job_offers_with_location_names = JobOffer.
-        select("job_offers.*, string_agg(locations.name, ', ') AS location_names").
+        select("job_offers.*, string_agg(locations.name, ', ') AS location_names, companies.name AS company_name").
         joins(:locations).
-        group('job_offers.id')
+        joins(:company).
+        group('job_offers.id, company_name')
 
       @job_offers = JobOffer.from(job_offers_with_location_names, :job_offers).
-        where("to_tsvector('simple', concat_ws(' ', location_names, title)) @@ to_tsquery('simple', ?)", "'#{params[:q].split(/\s+/).join(' & ')}'")
+        where("to_tsvector('simple', concat_ws(' ', location_names, title, company_name)) @@ to_tsquery('simple', ?)", "'#{params[:q].split(/\s+/).join(' & ')}'")
     end
 
     @job_offers = 
