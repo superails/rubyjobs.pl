@@ -25,20 +25,23 @@
       </div>
     <% end %>
 
-    <div class="container mx-auto flex mt-4 justify-between items-center px-4">
-      <%= link_to root_path do %>
-        <div class="flex">
-          <div class="font-bold text-red-800 border-2 border-red-800 px-2 py-1 mr-3">RJ</div>
-          <div class="text-2xl text-red-800 font-bold">RubyJobs.pl</div>
+    <div class="container mx-auto mt-4 px-4">
+      <div class="flex justify-between items-center border-b pb-4">
+        <%= link_to root_path do %>
+          <div class="flex">
+            <div class="font-bold text-red-800 border-2 border-red-800 px-2 py-1 mr-3">RJ</div>
+            <div class="text-2xl text-red-800 font-bold">RubyJobs.pl</div>
+          </div>
+        <% end %>
+        <div class="hidden md:block">
+          <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "text-red-600 font-bold px-6 py-3 inline-block rounded border-2 border-red-600" %>
         </div>
-      <% end %>
-      <div class="hidden md:block">
-        <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "text-red-600 font-bold px-6 py-3 inline-block rounded border-2 border-red-600" %>
-      </div>
-      <div id="menu-button" class="md:hidden text-gray-600">
-        <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        <div id="menu-button" class="md:hidden text-gray-600">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        </div>
       </div>
     </div>
+
     <div id="menu-container" class="container mx-auto hidden px-4 pt-2 flex flex-col items-end">
       <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "text-red-600 text-sm font-bold px-6 py-3 inline-block rounded mb-3 border-2 border-red-600" %>
     </div>
