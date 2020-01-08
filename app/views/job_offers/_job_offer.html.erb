@@ -3,11 +3,11 @@
     <div class="h-full flex flex-col border bg-white">
       <div class="flex-grow flex flex-col items-center py-6 px-6">
         <p class="text-2xl font-bold"><%= job_offer.company.name %></p>
-        <div class="w-20 h-20 mb-6 mt-5">
+        <div class="w-20 h-20 mb-6 mt-5 flex justify-center items-center">
           <% if job_offer.logo.attached? %>
-            <%= image_tag(job_offer.logo) %>
+            <%= image_tag(job_offer.logo, class: "max-w-full max-h-full") %>
           <% elsif job_offer.company.logo.attached? %>
-            <%= image_tag(job_offer.company.logo) %>
+            <%= image_tag(job_offer.company.logo, class: "max-w-full max-h-full") %>
           <% end %>
         </div>
         <p class="text-center mb-4 text-lg"><%= job_offer.title %></p>
