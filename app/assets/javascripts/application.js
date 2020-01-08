@@ -26,11 +26,11 @@
       }
     }
 
-    var menuButton = document.getElementById("menu-button");
+    var menuButton = document.getElementById("open-top-nav");
 
     if (menuButton) {
       menuButton.onclick = function() {
-        var menuContent = document.getElementById("menu-container");
+        var menuContent = document.getElementById("top-nav");
         if (menuContent.classList.contains('hidden')) {
           menuContent.classList.add('md:hidden');
           menuContent.classList.remove('hidden');
