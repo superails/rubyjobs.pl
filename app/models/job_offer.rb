@@ -7,7 +7,7 @@ class JobOffer < ApplicationRecord
   has_many :sites, dependent: :destroy 
   has_many :locations, through: :sites
 
-  scope :active, -> { where("state != 'expired' AND state != 'created'") }
+  scope :active, -> { where("state != 'expired' AND state != 'created' AND state != 'closed'") }
 
   has_one_attached :logo
 
