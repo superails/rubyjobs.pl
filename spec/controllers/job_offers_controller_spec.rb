@@ -19,7 +19,15 @@ RSpec.describe JobOffersController, type: :controller do
       end
 
       it 'does not assign expired job offers to @job_offers' do
-        expired_job_offer = create(:job_offer, published_at: Time.zone.now - 1.day, expired_at: Time.zone.now)
+        expired_job_offer = create(:job_offer, published_at: Time.zone.now - 1.day, expired_at: Time.zone.now, state: 'expired')
+
+        get :index
+
+        expect(assigns(:job_offers).pluck(:id)).to eq []
+      end
+
+      it 'does not assign closed job offers to @job_offers' do
+        closed_job_offer = create(:job_offer, published_at: Time.zone.now - 1.day, state: 'closed')
 
         get :index
 
@@ -142,6 +150,16 @@ RSpec.describe JobOffersController, type: :controller do
         job_offer = create(:job_offer, published_at: nil)
 
         expect { get :show, params: {id: job_offer.id} }.to_not have_enqueued_job(RegisterJobOfferVisitJob).with(job_offer.id)
+      end
+    end
+
+    context 'when job_offer is closed' do
+      it 'sets flash message' do
+        job_offer = create(:job_offer, state: 'closed')
+
+        get :show, params: {id: job_offer.id}
+
+        expect(flash[:notice]).to eq 'Oferta nieaktualna.'
       end
     end
   end

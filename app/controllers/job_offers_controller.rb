@@ -27,6 +27,8 @@ class JobOffersController < ApplicationController
   def show
     @job_offer = JobOffer.find(params[:id]).decorate
 
+    flash[:notice] = 'Oferta nieaktualna.' if @job_offer.closed?
+
     RegisterJobOfferVisitJob.perform_later(@job_offer.id) if @job_offer.published?
   end
 

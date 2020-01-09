@@ -23,6 +23,7 @@ class JobOffer < ApplicationRecord
     state :submitted
     state :published
     state :expired
+    state :closed
 
     event :submit do
       transitions from: [:created, :expired], to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
