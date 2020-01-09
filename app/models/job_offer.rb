@@ -40,6 +40,10 @@ class JobOffer < ApplicationRecord
     event :reject do
       transitions from: :submitted, to: :created, success: -> { update(submitted_at: nil) } 
     end
+
+    event :close do
+      transitions to: :closed
+    end
   end
 
   def city_names
