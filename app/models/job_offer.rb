@@ -30,7 +30,7 @@ class JobOffer < ApplicationRecord
     end
 
     event :publish  do
-      transitions from: [:created, :submitted, :expired], to: :published, success: -> { JobOfferPublisher.new(self).call } 
+      transitions from: [:created, :submitted, :expired, :closed], to: :published, success: -> { JobOfferPublisher.new(self).call } 
     end
 
     event :expire do
