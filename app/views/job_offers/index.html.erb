@@ -22,7 +22,11 @@
           </div>
 
           <% if @job_offers.present? %>
-            <%= render @job_offers %>
+            <% @job_offers.each do |job_offer| %>
+              <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-12">
+                <%= render partial: 'job_offer', locals: {job_offer: job_offer} %>
+              </div>
+            <% end %>
             <%= render "filler" %>
           <% else %>
             <p class="w-full text-2xl italic text-gray-600">Brak wyników dla zadanego kryterium wyszukiwania.</p>
