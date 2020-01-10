@@ -159,7 +159,7 @@ RSpec.describe JobOffersController, type: :controller do
 
         get :show, params: {id: job_offer.id}
 
-        expect(flash[:notice]).to eq 'Oferta nieaktualna.'
+        expect(flash[:notice]).to eq 'Ogłoszenie jest już nieaktualne.'
       end
     end
   end
