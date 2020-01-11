@@ -21,15 +21,15 @@ RSpec.describe JobOfferPublisher, type: :model do
     end
 
     it "sends summary email to user that created this job offer" do
-      job_offer = create(:job_offer, email: 'marcin@rubyjob_offers.pl')
+      job_offer = create(:job_offer, email: 'marcin@rubyjobs.pl')
 
       JobOfferPublisher.new(job_offer).call
 
-      expect(ActionMailer::Base.deliveries.last.to).to eq ['marcin@rubyjob_offers.pl']
+      expect(ActionMailer::Base.deliveries.last.to).to eq ['marcin@rubyjobs.pl']
     end
 
     it "clears visits count" do
-      job_offer = create(:job_offer, visits_count: 10, email: 'marcin@rubyjob_offers.pl')
+      job_offer = create(:job_offer, visits_count: 10, email: 'marcin@rubyjobs.pl')
 
       JobOfferPublisher.new(job_offer).call
 
@@ -37,7 +37,7 @@ RSpec.describe JobOfferPublisher, type: :model do
     end
 
     it "clears apply_link_clicks_count" do
-      job_offer = create(:job_offer, apply_link_clicks_count: 10, email: 'marcin@rubyjob_offers.pl')
+      job_offer = create(:job_offer, apply_link_clicks_count: 10, email: 'marcin@rubyjobs.pl')
 
       JobOfferPublisher.new(job_offer).call
 

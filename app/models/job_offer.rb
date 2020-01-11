@@ -40,6 +40,10 @@ class JobOffer < ApplicationRecord
     event :close do
       transitions to: :closed
     end
+
+    event :refresh do
+      transitions from: :published, to: :published, success: -> { JobOfferRefresher.new(self).call }
+    end
   end
 
   def city_names

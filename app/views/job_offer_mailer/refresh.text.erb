@@ -1,0 +1,12 @@
+Cześć,
+
+podbiłem Wasze ogłoszenie <%= job_offer_url(@job_offer) %>
+
+W okresie od <%= params[:previous_published_at] %> do <%= @job_offer.published_at.strftime("%d-%m-%Y %H:%M") %>
+ogłoszenie miało <%= params[:visits_count] %> wyświetleń i <%= params[:apply_link_clicks_count] %> kliknięć w link do aplikowania.
+
+ps. Jeżeli ogłoszneie jest już nieaktualne to proszę o informację, zamknę je.
+
+Pozdrawiam,
+Marcin Doliwa
+
