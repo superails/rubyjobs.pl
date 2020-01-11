@@ -1,13 +1,13 @@
 class JobOffer < ApplicationRecord
   include AASM
 
-  DEFAULT_EXPIRATION_TIME = 30.days
+  DEFAULT_REFRESH_TIME = 30.days
 
   belongs_to :company
   has_many :sites, dependent: :destroy 
   has_many :locations, through: :sites
 
-  scope :active, -> { where("state != 'expired' AND state != 'created' AND state != 'closed'") }
+  scope :active, -> { where("state != 'created' AND state != 'closed'") }
 
   has_one_attached :logo
 
@@ -22,19 +22,15 @@ class JobOffer < ApplicationRecord
     state :created, initial: true
     state :submitted
     state :published
-    state :expired
     state :closed
+    state :expired
 
     event :submit do
-      transitions from: [:created, :expired], to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
+      transitions from: [:created], to: :submitted, success: -> { JobOfferSubmitter.new(self).call }
     end
 
     event :publish  do
-      transitions from: [:created, :submitted, :expired, :closed], to: :published, success: -> { JobOfferPublisher.new(self).call } 
-    end
-
-    event :expire do
-      transitions from: :published, to: :expired, success: -> { JobOfferExpirer.new(self).call }
+      transitions from: [:created, :submitted, :closed], to: :published, success: -> { JobOfferPublisher.new(self).call } 
     end
 
     event :reject do
@@ -93,8 +89,8 @@ class JobOffer < ApplicationRecord
     end
   end
 
-  def expiration_time_in_days
-    duration_parts = ActiveSupport::Duration.build(DEFAULT_EXPIRATION_TIME).parts
+  def refresh_time_in_days
+    duration_parts = ActiveSupport::Duration.build(DEFAULT_REFRESH_TIME).parts
     duration_parts[:weeks].to_i * 7 + duration_parts[:days]
   end
 

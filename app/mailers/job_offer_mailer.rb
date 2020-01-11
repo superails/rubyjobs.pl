@@ -9,10 +9,6 @@ class JobOfferMailer < ApplicationMailer
     mail(to: @job_offer.email, subject: "Twoje ogłoszenie zostało opublikowane")
   end
 
-  def expire
-    mail(to: @job_offer.email, subject: "Twoje ogłoszenie przestało być wyświetlane")
-  end
-
   private
 
   def find_job_offer

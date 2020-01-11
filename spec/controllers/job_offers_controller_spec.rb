@@ -18,14 +18,6 @@ RSpec.describe JobOffersController, type: :controller do
         expect(assigns(:job_offers).pluck(:id)).to eq [published_job_offer.id]
       end
 
-      it 'does not assign expired job offers to @job_offers' do
-        expired_job_offer = create(:job_offer, published_at: Time.zone.now - 1.day, expired_at: Time.zone.now, state: 'expired')
-
-        get :index
-
-        expect(assigns(:job_offers).pluck(:id)).to eq []
-      end
-
       it 'does not assign closed job offers to @job_offers' do
         closed_job_offer = create(:job_offer, published_at: Time.zone.now - 1.day, state: 'closed')
 
