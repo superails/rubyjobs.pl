@@ -32,6 +32,8 @@ module Rubyjobs
     config.active_record.schema_format = :sql
     config.i18n.default_locale = :pl
 
+    config.time_zone = 'Warsaw'
+
     ActiveStorage::Engine.config
       .active_storage
       .content_types_to_serve_as_binary
