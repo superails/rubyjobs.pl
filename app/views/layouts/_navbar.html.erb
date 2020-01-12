@@ -28,7 +28,11 @@
     <a href="#">Blog</a>
   </div>
   <div class="flex flex-col">
-    <a href="#">Zaloguj się</a>
-    <%= link_to "Dodaj ogłoszenie", class: "text-red-600" %>
+    <% if user_signed_in? %>
+      <%= link_to('Wyloguj się', destroy_user_session_path, method: :delete) %>        
+    <% else %>
+      <%= link_to('Zaloguj się', new_user_session_path) %>  
+    <% end %>
+    <%= link_to "Dodaj ogłoszenie", new_job_offer_path, class: "text-red-600" %>
   </div>
 </div>
