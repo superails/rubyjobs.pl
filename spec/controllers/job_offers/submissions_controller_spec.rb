@@ -34,7 +34,7 @@ RSpec.describe JobOffers::SubmissionsController, type: :controller do
       it 'sends publish email to job offer creator' do
         post :create, params: {token: job_offer.token}
 
-        expect(ActionMailer::Base.deliveries.map(&:subject)).to include "Twoje ogłoszenie zostało opublikowane"
+        expect(ActionMailer::Base.deliveries.map(&:subject)).to include "Twoje ogłoszenie zostało opublikowane."
       end
 
       it 'sets up submitted_at' do
