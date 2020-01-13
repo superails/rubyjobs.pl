@@ -1,0 +1,17 @@
+<div class="bg-gray-100 pt-20 pb-32 border-b px-5">
+  <div class="container m-auto max-w-xl px-12 pt-10 pb-10 bg-white border">
+    <h2 class="text-center text-3xl mb-6">Zapomniałeś hasła?</h2>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <%= f.label :email, class: "block text-gray-700 mb-2 text-lg" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
+
+      <%= f.submit "Wyślij instrukcje zmiany hasła", class: "bg-red-600 text-white px-12 py-2 font-bold mt-8" %>
+    <% end %>
+
+    <div class="mt-8 text-gray-600 text-sm">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
