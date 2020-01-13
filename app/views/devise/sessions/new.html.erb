@@ -1,28 +1,29 @@
-<div class="container m-auto max-w-xl px-4 pt-8 pb-10">
-  <h2 class="text-2xl text-red-600 border-b pb-2 mb-5">Login</h2>
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="bg-gray-100 pt-20 pb-32 border-b px-5">
+  <div class="container m-auto max-w-xl px-12 pt-10 pb-10 bg-white border">
+    <h2 class="text-center text-3xl mb-6">Zaloguj się</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.label :email, class: "block text-gray-700 mb-2 text-lg" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
 
-      <%= f.label :password, class: "block text-gray-700 mb-2 text-lg" %>
-      <%= f.password_field :password, class: "w-full border px-2 py-2 mb-1 rounded bg-gray-100 focus:bg-white" %>
+      <%= f.label :password, class: "block text-gray-700 mt-4 mb-2 text-lg" %>
+      <%= f.password_field :password, class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
 
-    <% if devise_mapping.rememberable? %>
-      <div>
-        <%= f.label :remember_me, class: "text-gray-700 block mt-2" do %>
-          <%= f.check_box :remember_me, class: "mr-2 align-middle" %>
-          <span class="">
-            Zapamiętaj mnie
-          </span>
-        <% end %>
-      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="mt-4">
+          <%= f.label :remember_me, class: "text-gray-700 block mt-2" do %>
+            <%= f.check_box :remember_me, class: "mr-2 align-middle" %>
+            <span>
+              Zapamiętaj mnie
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= f.submit "Login", class: "bg-red-600 text-white px-12 py-2 font-bold mt-8" %>
     <% end %>
 
-    <%= f.submit "Login", class: "bg-red-600 text-white px-12 py-2 font-bold rounded mt-3" %>
-  <% end %>
-
-  <div class="mt-4">
-    <%= render "devise/shared/links" %>
+    <div class="mt-8 text-gray-600 text-sm">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>
