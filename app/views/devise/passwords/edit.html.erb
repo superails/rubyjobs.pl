@@ -1,0 +1,25 @@
+<div class="bg-gray-100 pt-20 pb-32 border-b px-5">
+  <div class="container m-auto max-w-xl px-12 pt-10 pb-10 bg-white border">
+    <h2 class="text-center text-3xl mb-6">Zmień hasło</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <%= f.label :password, "Nowe hasło", class: "block text-gray-700 mt-4 mb-2 text-lg" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
+      <% if @minimum_password_length %>
+        <span class="italic text-gray-700">(Co najmniej <%= @minimum_password_length %> znaków)</span>
+      <% end %>
+
+      <%= f.label :password_confirmation, class: "block text-gray-700 mt-4 mb-2 text-lg" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
+
+      <%= f.submit "Zarejestruj się", class: "bg-red-600 text-white px-12 py-2 font-bold mt-8" %>
+    <% end %>
+
+    <div class="mt-8 text-gray-600 text-sm">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
