@@ -9,7 +9,7 @@ pl:
         current_password: Aktualne hasło
         current_sign_in_at: Data bieżącego logowania
         current_sign_in_ip: Bieżący adres IP
-        email: Adres e-mail
+        email: e-mail
         encrypted_password: Zaszyfrowane hasło
         failed_attempts: Nieudanych prób
         last_sign_in_at: Data ostatniego logowania
