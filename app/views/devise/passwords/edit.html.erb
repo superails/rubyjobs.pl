@@ -3,17 +3,18 @@
     <h2 class="text-center text-3xl mb-6">Zmień hasło</h2>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
       <%= f.hidden_field :reset_password_token %>
 
       <%= f.label :password, "Nowe hasło", class: "block text-gray-700 mt-4 mb-2 text-lg" %>
+      <%= render partial: 'shared/error', locals: {resource: resource, attribute_name: :password} %>
       <%= f.password_field :password, autocomplete: "new-password", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
       <% if @minimum_password_length %>
         <span class="italic text-gray-700">(Co najmniej <%= @minimum_password_length %> znaków)</span>
       <% end %>
 
       <%= f.label :password_confirmation, class: "block text-gray-700 mt-4 mb-2 text-lg" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
+      <%= render partial: 'shared/error', locals: {resource: resource, attribute_name: :password_confirmation} %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "#{'border-red-500' if resource.errors[:password_confirmation].present?} w-full border px-2 py-2 mb-1 bg-gray-100 focus:bg-white" %>
 
       <%= f.submit "Zmień hasło", class: "bg-red-600 text-white px-12 py-2 font-bold mt-8" %>
     <% end %>
