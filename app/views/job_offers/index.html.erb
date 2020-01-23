@@ -9,7 +9,7 @@
 
             <%= form_with url: job_offers_path, method: :get, class: 'flex items-stretch mb-16', local: true do |form| %>
               <%= form.text_field :q, class: "text-lg w-full bg-white border px-4 py-4", value: params[:q], autofocus: true %>
-              <%= button_tag class: "bg-red-500" do %>
+              <%= button_tag class: "bg-red-500", name: nil do %>
                 <div class="bg-red-500 text-white text-xl font-bold px-16 hidden md:block">
                   Szukaj
                 </div>
