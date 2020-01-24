@@ -16,7 +16,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         visit "/users/sign_in"
         fill_in :user_email, with: user.email
         fill_in :user_password, with: user.password
-        click_button "Login" 
+        click_button "Zaloguj się" 
 
         visit "/"
         expect(page).to have_text("RoR Developer")
@@ -35,7 +35,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         visit "/users/sign_in"
         fill_in :user_email, with: user.email
         fill_in :user_password, with: user.password
-        click_button "Login" 
+        click_button "Zaloguj się" 
 
         visit "/"
         expect(page).to have_text("RoR Developer")
@@ -57,7 +57,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         visit "/users/sign_in"
         fill_in :user_email, with: user.email
         fill_in :user_password, with: user.password
-        click_button "Login" 
+        click_button "Zaloguj się" 
 
         visit "/"
         expect(page).to_not have_text("RoR Developer")
@@ -76,7 +76,7 @@ RSpec.describe "Job offer visibility", :type => :system do
         visit "/users/sign_in"
         fill_in :user_email, with: user.email
         fill_in :user_password, with: user.password
-        click_button "Login" 
+        click_button "Zaloguj się" 
 
         visit "/"
         expect(page).to have_text("RoR Developer")

@@ -26,7 +26,7 @@ RSpec.describe "Job offer details", :type => :system do
     visit "/users/sign_in"
     fill_in :user_email, with: admin.email
     fill_in :user_password, with: admin.password
-    click_button "Login" 
+    click_button "Zaloguj się" 
 
     click_link "Accept"
 

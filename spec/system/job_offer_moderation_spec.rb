@@ -29,7 +29,7 @@ RSpec.describe "Job offer moderation", :type => :system do
 
     fill_in :user_email, with: user.email
     fill_in :user_password, with: user.password
-    click_button "Login" 
+    click_button "Zaloguj się" 
 
     visit "/"
     click_link "Accept"
@@ -42,7 +42,7 @@ RSpec.describe "Job offer moderation", :type => :system do
     visit "/users/sign_in"
     fill_in :user_email, with: user.email
     fill_in :user_password, with: user.password
-    click_button "Login" 
+    click_button "Zaloguj się" 
 
     visit "/"
     click_link "Reject"

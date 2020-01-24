@@ -116,7 +116,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     click_link "Dalej"
 
     expect(page).to have_text("Informacje dodatkowe")
-    expect(page).to have_text("będzie aktywne przez 30 dni")
+    expect(page).to have_text("będzie automatycznie przedłużone i odświeżone po 30 dniach")
     expect(page).to have_text("marcin@rubyjobs.pl")
   end
 
