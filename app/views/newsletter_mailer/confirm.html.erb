@@ -1,0 +1,12 @@
+<p>Potwierdź subskrypcję cotygodniowego przeglądu ofert pracy dla programistów Rubiego klikając w poniższy link.</p>
+
+<%= link_to "Potwierdź subskrypcję", newsletter_subscription_confirmation_url(@subscription.confirm_token) %> 
+
+<p>Jeśli otrzymałeś tę wiadomość przez pomyłkę, po prostu ją usuń. Nie będziesz zapisany, jeżeli nie klikniesz w powyższy link potwierdzający.</p>
+
+<p>W przypadku pytań i uwag dotyczących nie tylko tej listy, ale i całego projektu daj mi znać na maila. Będę wdzięczny.</p>
+
+<p>
+Pozdrawiam,<br/>
+Marcin Doliwa<br/>
+<%= link_to "RubyJobs.pl", root_url %>

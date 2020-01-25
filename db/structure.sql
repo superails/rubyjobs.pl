@@ -208,6 +208,40 @@ ALTER SEQUENCE public.locations_id_seq OWNED BY public.locations.id;
 
 
 --
+-- Name: newsletter_subscriptions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.newsletter_subscriptions (
+    id bigint NOT NULL,
+    email character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    confirm_token character varying,
+    state character varying,
+    confirmation_sent_at timestamp without time zone
+);
+
+
+--
+-- Name: newsletter_subscriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.newsletter_subscriptions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newsletter_subscriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.newsletter_subscriptions_id_seq OWNED BY public.newsletter_subscriptions.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -320,6 +354,13 @@ ALTER TABLE ONLY public.locations ALTER COLUMN id SET DEFAULT nextval('public.lo
 
 
 --
+-- Name: newsletter_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.newsletter_subscriptions ALTER COLUMN id SET DEFAULT nextval('public.newsletter_subscriptions_id_seq'::regclass);
+
+
+--
 -- Name: sites id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -387,6 +428,14 @@ ALTER TABLE ONLY public.job_offers
 
 ALTER TABLE ONLY public.locations
     ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newsletter_subscriptions newsletter_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.newsletter_subscriptions
+    ADD CONSTRAINT newsletter_subscriptions_pkey PRIMARY KEY (id);
 
 
 --
@@ -533,6 +582,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191112205605'),
 ('20191115215947'),
 ('20191118202800'),
-('20200111170133');
+('20200111170133'),
+('20200124205012'),
+('20200124222156'),
+('20200124223852'),
+('20200125110446');
 
 

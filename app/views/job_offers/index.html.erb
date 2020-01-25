@@ -22,10 +22,13 @@
           </div>
 
           <% if @job_offers.present? %>
-            <% @job_offers.each do |job_offer| %>
+            <% @job_offers.each.with_index do |job_offer, index| %>
               <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-12">
                 <%= render partial: 'job_offer', locals: {job_offer: job_offer} %>
               </div>
+              <% if show_subscription_box? && index == [@job_offers.count - 1, 4].min %>
+                <%= render 'newsletter' %>
+              <% end %>
             <% end %>
             <%= render "filler" %>
           <% else %>

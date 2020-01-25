@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   resources :jobs, except: [:destroy, :show], controller: 'job_offers', as: 'job_offers', param: :token
   resources :jobs, only: [:show], controller: 'job_offers', as: 'job_offers'
+  resources :newsletter_subscriptions, only: [:create]
+
+  get 'newsletter_subscriptions/:confirm_token/confirm', to: 'newsletter_subscriptions/confirmations#create', as: 'newsletter_subscription_confirmation'
 end
