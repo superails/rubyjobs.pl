@@ -1,17 +1,11 @@
 class JobOffersController < ApplicationController
+  helper_method :facet_slug_active?
+
   def index
     @job_offers = JobOffer.all
+    @filters = FacetedSearchBuilder.new(search_params).call
 
-    if params[:q].present?
-      job_offers_with_location_names = JobOffer.
-        select("job_offers.*, string_agg(locations.name, ', ') AS location_names, companies.name AS company_name").
-        joins(:locations).
-        joins(:company).
-        group('job_offers.id, company_name')
-
-      @job_offers = JobOffer.from(job_offers_with_location_names, :job_offers).
-        where("to_tsvector('simple', concat_ws(' ', location_names, title, company_name)) @@ to_tsquery('simple', ?)", "'#{params[:q].split(/\s+/).join(' & ')}'")
-    end
+    @job_offers = JobOffer.joins(:facets).where(facets: {slug: search_params.values.flatten}).distinct if search_params.present?
 
     @job_offers = 
       if current_user.admin?
@@ -62,6 +56,14 @@ class JobOffersController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.permit(location: [], experience: [])
+  end
+
+  def facet_slug_active?(facet_slug)
+    search_params.values.flatten.include?(facet_slug)
+  end
 
   def job_offer_params
     params.require(:job_offer).permit(:title, :city_names, :remote, :salary, :salary_type, :description, :apply_link, :logo, :email, company_attributes: [:name])

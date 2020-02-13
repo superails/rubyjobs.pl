@@ -1,4 +1,6 @@
 class JobOfferDecorator < Draper::Decorator
+  include ActionView::Helpers::NumberHelper
+
   delegate_all
 
   def location_names
@@ -24,5 +26,9 @@ class JobOfferDecorator < Draper::Decorator
       [ 'Ruby on Rails', 'RoR']]
       
     translations.reduce(title) { |result, translation| result.gsub(/#{translation[0]}/i, translation[1]) }
+  end
+
+  def formatted_salary
+    salary.gsub(/\d+/) {|number| number_with_delimiter(number, delimiter: ' ')}
   end
 end

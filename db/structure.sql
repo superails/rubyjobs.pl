@@ -134,6 +134,105 @@ CREATE TABLE public.data_migrations (
 
 
 --
+-- Name: facet_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.facet_categories (
+    id bigint NOT NULL,
+    name character varying,
+    slug character varying,
+    rank integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: facet_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.facet_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: facet_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.facet_categories_id_seq OWNED BY public.facet_categories.id;
+
+
+--
+-- Name: facets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.facets (
+    id bigint NOT NULL,
+    name character varying,
+    slug character varying,
+    rank integer,
+    facet_category_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: facets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.facets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: facets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.facets_id_seq OWNED BY public.facets.id;
+
+
+--
+-- Name: facettings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.facettings (
+    id bigint NOT NULL,
+    job_offer_id bigint,
+    facet_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: facettings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.facettings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: facettings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.facettings_id_seq OWNED BY public.facettings.id;
+
+
+--
 -- Name: job_offers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -340,6 +439,27 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: facet_categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facet_categories ALTER COLUMN id SET DEFAULT nextval('public.facet_categories_id_seq'::regclass);
+
+
+--
+-- Name: facets id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facets ALTER COLUMN id SET DEFAULT nextval('public.facets_id_seq'::regclass);
+
+
+--
+-- Name: facettings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facettings ALTER COLUMN id SET DEFAULT nextval('public.facettings_id_seq'::regclass);
+
+
+--
 -- Name: job_offers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -415,6 +535,30 @@ ALTER TABLE ONLY public.data_migrations
 
 
 --
+-- Name: facet_categories facet_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facet_categories
+    ADD CONSTRAINT facet_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: facets facets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facets
+    ADD CONSTRAINT facets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: facettings facettings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facettings
+    ADD CONSTRAINT facettings_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: job_offers job_offers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -484,6 +628,27 @@ CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_b
 
 
 --
+-- Name: index_facets_on_facet_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_facets_on_facet_category_id ON public.facets USING btree (facet_category_id);
+
+
+--
+-- Name: index_facettings_on_facet_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_facettings_on_facet_id ON public.facettings USING btree (facet_id);
+
+
+--
+-- Name: index_facettings_on_job_offer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_facettings_on_job_offer_id ON public.facettings USING btree (job_offer_id);
+
+
+--
 -- Name: index_job_offers_on_company_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -523,6 +688,30 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: facettings fk_rails_1bd75fd161; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facettings
+    ADD CONSTRAINT fk_rails_1bd75fd161 FOREIGN KEY (job_offer_id) REFERENCES public.job_offers(id);
+
+
+--
+-- Name: facettings fk_rails_4e2d2c9993; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facettings
+    ADD CONSTRAINT fk_rails_4e2d2c9993 FOREIGN KEY (facet_id) REFERENCES public.facets(id);
+
+
+--
+-- Name: facets fk_rails_7f9894a3d3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.facets
+    ADD CONSTRAINT fk_rails_7f9894a3d3 FOREIGN KEY (facet_category_id) REFERENCES public.facet_categories(id);
 
 
 --
@@ -586,6 +775,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200124205012'),
 ('20200124222156'),
 ('20200124223852'),
-('20200125110446');
+('20200125110446'),
+('20200216092341'),
+('20200216092410'),
+('20200216092604');
 
 
