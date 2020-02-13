@@ -1,25 +1,19 @@
-  <%= link_to job_offer do %>
-    <div class="h-full flex flex-col border bg-white">
-      <div class="flex-grow flex flex-col items-center py-6 px-6">
-        <p class="text-2xl font-bold"><%= job_offer.company.name %></p>
-        <% if policy(job_offer).create? %>
-          <div class="text-sm">
-            <%= link_to "Accept", job_offers_publications_path(token: job_offer.token), method: :post, class: "text-green-500" %> -
-            <%= link_to "Reject", job_offers_submission_path(token: job_offer.token), method: :delete, class: "text-red-500" %> 
-          </div>
-        <% end %>
-        <div class="w-20 h-20 mb-6 mt-5 flex justify-center items-center">
-          <% if job_offer.logo.attached? %>
-            <%= image_tag(job_offer.logo, class: "max-w-full max-h-full") %>
-          <% elsif job_offer.company.logo.attached? %>
-            <%= image_tag(job_offer.company.logo, class: "max-w-full max-h-full") %>
-          <% end %>
-        </div>
-        <p class="text-center mb-4 text-lg"><%= job_offer.title %></p>
-        <p class="text-sm"><%= job_offer.salary %> (<%= job_offer.salary_type %>)</p>
-      </div>
-      <div class="text-center bg-gray-200 py-5 px-4">
-        <%= job_offer.location_names %>
-      </div>
+<%= link_to job_offer do %>
+  <div class="bg-white border border-gray-200 flex px-6 py-5 mb-6">
+    <div class="w-20 h-20 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-6 self-center">
+      <% if job_offer.logo.attached? %>
+        <%= image_tag(job_offer.logo, class: "max-w-full max-h-full") %>
+      <% elsif job_offer.company.logo.attached? %>
+        <%= image_tag(job_offer.company.logo, class: "max-w-full max-h-full") %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="flex-grow">
+      <div class="flex justify-between">
+        <p><%= job_offer.company.name %></p>
+        <p><%= job_offer.formatted_salary %> (<%= job_offer.salary_type %>)</p>
+      </div>
+      <p class="text-2xl font-header font-medium my-2"><%= job_offer.title %></p>
+      <%= job_offer.location_names %>
+    </div>
+  </div>
+<% end %>

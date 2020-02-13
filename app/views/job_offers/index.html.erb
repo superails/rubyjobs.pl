@@ -1,39 +1,9 @@
-    <div class="bg-gray-100 border-b">
-      <div class="container m-auto pt-8 px-5">
-        <div class="flex flex-wrap -mx-4 justify-center">
-          <div class="w-full lg:w-3/4 mb-8 px-4">
-            <div class="text-center mb-12">
-              <h1 class="text-5xl font-bold text-red-800 font-serif"><%= link_to "RubyJobs.pl", root_path%></h1>
-              <h2 class="text-xl text-gray-800">Ogłoszenia pracy dla programistów Rubiego</h2>
-            </div>
+<div class="bg-gray-100 py-10">
+  <div class="container m-auto grid xl:grid-cols-7 md:grid-cols-3 gap-8 px-5">
+    <%= render 'filters_sidebar' %>
 
-            <%= form_with url: job_offers_path, method: :get, class: 'flex items-stretch mb-16', local: true do |form| %>
-              <%= form.text_field :q, class: "text-lg w-full bg-white border px-4 py-4", value: params[:q], autofocus: true %>
-              <%= button_tag class: "bg-red-500", name: nil do %>
-                <div class="bg-red-500 text-white text-xl font-bold px-16 hidden md:block">
-                  Szukaj
-                </div>
-                
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="md:hidden block text-white w-8 h-8 fill-current mx-4">
-                  <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" class=""></path>
-                </svg>
-              <% end %>
-            <% end %>
-          </div>
-
-          <% if @job_offers.present? %>
-            <% @job_offers.each.with_index do |job_offer, index| %>
-              <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-12">
-                <%= render partial: 'job_offer', locals: {job_offer: job_offer} %>
-              </div>
-              <% if show_subscription_box? && index == [@job_offers.count - 1, 4].min %>
-                <%= render 'newsletter' %>
-              <% end %>
-            <% end %>
-            <%= render "filler" %>
-          <% else %>
-              <p class="text-center w-full text-2xl italic text-gray-600 mb-12">Brak wyników dla zadanego kryterium wyszukiwania.</p>
-          <% end %>
-        </div>
-      </div>
+    <div class="xl:col-span-5 md:col-span-2">
+      <%= render @job_offers %>
     </div>
+  </div>
+</div>
