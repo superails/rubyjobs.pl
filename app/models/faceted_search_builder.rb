@@ -29,12 +29,14 @@ class FacetedSearchBuilder
         .group('facets.id')
         .order('job_offers_count DESC, facets.name')
 
+      filtered_facets_count = filtered_facets.map{|facet| [facet, facet.job_offers_count]}.to_h
+
       [
         category,
-        default_search[category].map{|facet| facet.job_offers_count = 0; facet} - filtered_facets + filtered_facets
+        default_search[category].map{|facet| facet.job_offers_count = filtered_facets_count[facet] || 0; facet}
       ]
     end
 
-    faceted_search.map{|category, facets| [category.slug, facets.map{|facet| [facet.name, facet.job_offers_count, facet.slug]}]}.to_h
+    faceted_search.map{|category, facets| [category, facets]}.to_h
   end
 end
