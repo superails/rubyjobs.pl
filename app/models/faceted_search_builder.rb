@@ -11,8 +11,9 @@ class FacetedSearchBuilder
       .where(job_offers: {state: 'published'})
       .group('facets.id')
       .includes(:category)
+      .order('job_offers_count DESC, facets.name')
 
-    default_search = all_facets.group_by(&:category)
+    default_search = all_facets.group_by(&:category).sort_by{|category, _| category.rank}.to_h
 
     faceted_search = default_search.keys.map do |category|
       next [category, default_search[category]] if search_params.except(category.slug.to_sym).empty?
@@ -26,6 +27,7 @@ class FacetedSearchBuilder
         .where(facet_category_id: category.id) 
         .where(job_offers: {id: filtered_job_offers})
         .group('facets.id')
+        .order('job_offers_count DESC, facets.name')
 
       [
         category,
