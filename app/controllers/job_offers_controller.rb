@@ -2,7 +2,7 @@ class JobOffersController < ApplicationController
   helper_method :facet_slug_active?
 
   def index
-    @job_offers = JobOffer.all
+    @job_offers = JobOffer.with_attached_logo
     @filters = FacetedSearchBuilder.new(search_params).call
 
     @job_offers = JobOffer.joins(:facets).where(facets: {slug: search_params.values.flatten}).distinct if search_params.present?
