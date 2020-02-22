@@ -8,9 +8,9 @@
       <% end %>
     </div>
     <div class="flex-grow">
-      <div class="flex justify-between">
+      <div class="flex flex-col sm:flex-row justify-between">
         <p><%= job_offer.company.name %></p>
-        <p><%= job_offer.formatted_salary %> (<%= job_offer.salary_type %>)</p>
+        <p><%= job_offer.formatted_salary %> <span class="hidden sm:inline">(<%= job_offer.salary_type %>)</span></p>
       </div>
       <p class="text-2xl font-header font-medium my-2"><%= job_offer.title %></p>
       <%= job_offer.location_names %>
