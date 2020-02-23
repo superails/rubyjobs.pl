@@ -16,3 +16,5 @@
 // const imagePath = (name) => images(name, true)
 
 import "css/application.css"
+
+import "controllers"
