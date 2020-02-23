@@ -6,6 +6,7 @@ class FacetGenerator
   end
 
   def call
+    job_offer.facets.destroy_all
     generate_location_facets
     generate_experience_facets
   end
@@ -13,7 +14,7 @@ class FacetGenerator
   private
 
   def generate_location_facets
-    job_offer.locations.each do |location|
+    job_offer.locations.uniq.each do |location|
       location_category = FacetCategory.find_or_create_by(
         name: 'Lokalizacja',
         slug: 'location',

@@ -32,6 +32,15 @@ RSpec.describe FacetGenerator, type: :model do
       expect(senior2_job_offer.facets.experience.pluck(:name)).to match_array(['Senior'])
       expect(mid_job_offer.facets.experience.pluck(:name)).to match_array(['Mid'])
     end
+
+    it 'does not duplicate facets' do
+      job_offer = create(:job_offer, city_names: 'Warszawa', remote: '1', title: 'Junior Dev')
+
+      FacetGenerator.new(job_offer).call
+      FacetGenerator.new(job_offer).call
+
+      expect(job_offer.facets.count).to eq 3
+    end
   end
 end
 
