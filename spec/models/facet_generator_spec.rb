@@ -41,6 +41,14 @@ RSpec.describe FacetGenerator, type: :model do
 
       expect(job_offer.facets.count).to eq 3
     end
+
+    it 'can create multiple experience facets for one job offer' do
+      job_offer = create(:job_offer, city_names: 'Warszawa', remote: '1', title: 'Junior or Mid or Senior Dev')
+
+      FacetGenerator.new(job_offer).call
+
+      expect(job_offer.facets.experience.pluck(:name)).to match_array(['Junior', 'Senior', 'Mid'])
+    end
   end
 end
 

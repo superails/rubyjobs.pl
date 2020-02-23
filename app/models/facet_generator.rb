@@ -36,13 +36,16 @@ class FacetGenerator
       rank: 20
     )
 
-    job_offer.facets << case job_offer.title
-    when /junior|młodszy/i
-      Facet.find_or_create_by(name: 'Junior', slug: 'junior', category: experience_category)
-    when /senior|starszy/i
-      Facet.find_or_create_by(name: 'Senior', slug: 'senior', category: experience_category)
-    else
-      Facet.find_or_create_by(name: 'Mid', slug: 'mid', category: experience_category)
+    if job_offer.title =~ /junior|młodszy/i
+      job_offer.facets << Facet.find_or_create_by(name: 'Junior', slug: 'junior', category: experience_category)
     end
+
+    if job_offer.title =~ /senior|starszy/i
+      job_offer.facets << Facet.find_or_create_by(name: 'Senior', slug: 'senior', category: experience_category)
+    end 
+
+    if job_offer.title =~ /Mid/i || job_offer.facets.experience.empty?
+      job_offer.facets << Facet.find_or_create_by(name: 'Mid', slug: 'mid', category: experience_category)
+    end 
   end
 end
