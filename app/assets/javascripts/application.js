@@ -17,18 +17,6 @@
 //= require_tree .
 
   document.addEventListener("turbolinks:load", function() {
-    var closeFlashMessageButton = document.getElementById("close-flash-message");
-
-    if (closeFlashMessageButton) {
-      closeFlashMessageButton.onclick = function() {
-        var flashMessageBox = document.getElementById("flash-message");
-        flashMessageBox.remove();
-      }
-    }
-
-  });
-
-  document.addEventListener("turbolinks:load", function() {
     var clearFiltersLink = document.getElementById('filters');
 
     if (!clearFiltersLink) { return };
