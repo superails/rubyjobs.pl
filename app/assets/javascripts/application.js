@@ -17,16 +17,6 @@
 //= require_tree .
 
   document.addEventListener("turbolinks:load", function() {
-    var clearFiltersLink = document.getElementById('filters');
-
-    if (!clearFiltersLink) { return };
-
-    if (clearFiltersLink.querySelectorAll('input[type=checkbox]:checked').length > 0) {
-      document.getElementById('clear-filters').classList.remove('hidden');
-    }
-  });
-
-  document.addEventListener("turbolinks:load", function() {
     var filtersSidebar = document.querySelector('#filters');
 
     if (!filtersSidebar) { return };
