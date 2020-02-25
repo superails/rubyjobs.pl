@@ -10,7 +10,7 @@ class JobOffersController < ApplicationController
         .joins(facets: :category)
         .where(facets: {slug: search_params.values.flatten})
         .group('job_offers.id')
-        .having('COUNT(facet_categories.id) = ?', search_params.keys.length)
+        .having('COUNT(DISTINCT facet_categories.id) = ?', search_params.keys.length)
     end
 
     @job_offers = 
