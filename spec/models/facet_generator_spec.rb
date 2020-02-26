@@ -22,6 +22,8 @@ RSpec.describe FacetGenerator, type: :model do
       junior2_job_offer = create(:job_offer, remote: '1', title: 'Młodszy Dev')
       senior1_job_offer = create(:job_offer, remote: '1', title: 'Senior Dev')
       senior2_job_offer = create(:job_offer, remote: '1', title: 'Starszy Dev')
+      tech_lead_job_offer = create(:job_offer, remote: '1', title: 'Tech Lead')
+      cto_job_offer = create(:job_offer, remote: '1', title: 'Looking for CTO')
       mid_job_offer = create(:job_offer, remote: '1', title: 'RoR Dev')
 
       JobOffer.all.each {|job_offer| FacetGenerator.new(job_offer).call}
@@ -31,6 +33,8 @@ RSpec.describe FacetGenerator, type: :model do
       expect(senior1_job_offer.facets.experience.pluck(:name)).to match_array(['Senior'])
       expect(senior2_job_offer.facets.experience.pluck(:name)).to match_array(['Senior'])
       expect(mid_job_offer.facets.experience.pluck(:name)).to match_array(['Mid'])
+      expect(tech_lead_job_offer.facets.experience.pluck(:name)).to match_array(['Senior'])
+      expect(cto_job_offer.facets.experience.pluck(:name)).to match_array(['Senior'])
     end
 
     it 'does not duplicate facets' do

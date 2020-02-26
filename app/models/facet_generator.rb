@@ -40,7 +40,7 @@ class FacetGenerator
       job_offer.facets << Facet.find_or_create_by(name: 'Junior', slug: 'junior', category: experience_category)
     end
 
-    if job_offer.title =~ /senior|starszy/i
+    if job_offer.title =~ /senior|starszy|lead|cto/i
       job_offer.facets << Facet.find_or_create_by(name: 'Senior', slug: 'senior', category: experience_category)
     end 
 
