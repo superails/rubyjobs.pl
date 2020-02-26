@@ -15,31 +15,3 @@
 //= require turbolinks
 //= require trix
 //= require_tree .
-
-  document.addEventListener("turbolinks:load", function() {
-    var filtersSidebar = document.querySelector('#filters');
-
-    if (!filtersSidebar) { return };
-
-    filtersSidebar.onclick = function(event) {
-      if (event.target.value) {
-        categoryContainers = document.querySelectorAll('.category');
-
-        params = [...categoryContainers]
-          .map(function(categoryContainer) {
-            categoryFacets = [...categoryContainer.querySelectorAll('input[type=checkbox]:checked')].map(checkbox => checkbox.value)
-            return [categoryContainer.id, categoryFacets]})
-          .filter(facetTuple => facetTuple[1].length > 0 )
-          .map(facetTuple => facetTuple[1].map(facet => facetTuple[0] + "[]=" + facet))
-          .flat().join('&');
-
-        if (params) {
-          Turbolinks.visit("/?" + params);
-        } else {
-          Turbolinks.visit("/");
-        }
-
-      }
-    }
-  });
-
