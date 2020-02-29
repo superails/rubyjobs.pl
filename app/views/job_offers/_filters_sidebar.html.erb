@@ -1,4 +1,7 @@
-<div data-controller="filters" id="filters" class="mb-6 xl:col-span-2 md:col-span-1">
+<div 
+  data-controller="filters" 
+  data-target="mobile.filtersContainer"
+  class="<%= "hidden" unless cookies[:filters] == "on" %> md:block mb-6 xl:col-span-2 md:col-span-1">
   <div class="bg-white border border-gray-200 px-5 py-5">
     <div class="flex justify-between items-center">
       <p class="font-header text-xl font-medium mb-2">Filtry</p>
@@ -7,7 +10,7 @@
           class: "hidden text-red-600 font-semibold", 
           data: {target: "filters.clearLink"} 
         %>
-    </div>
+  </div>
 
   <% @filters.each do |category, facets| %>
     <p class="font-header text-lg font-medium mb-3"><%= category.name %></p>
@@ -21,7 +24,7 @@
                    class="form-checkbox rounded-none w-5 h-5" 
                    <%= "disabled" if facet.job_offers_count == 0 %>
                    data-action="change->filters#update">
-            <span class="ml-3"><%= facet.name %></span>
+                   <span class="ml-3"><%= facet.name %></span>
           </label>
           <span><%= facet.job_offers_count %></span>
         </div>

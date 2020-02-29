@@ -1,12 +1,17 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "clearLink" ]
+  static targets = [ "clearLink", "container" ]
 
   connect() {
     if (this.activeFilters.length > 0) {
       this.clearLinkTarget.classList.remove("hidden");
     }
+  }
+
+  show(event) {
+    event.preventDefault();
+    this.containerTarget.classList.remove("hidden");
   }
 
   update() {
