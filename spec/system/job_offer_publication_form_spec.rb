@@ -91,7 +91,7 @@ RSpec.describe "Job offer publication form", :type => :system do
     expect(page).to have_text("Zdalnie")
     expect(page).to have_text("Warszawa")
     expect(page).to have_text("Białystok")
-    expect(page).to have_text("11000 - 18000")
+    expect(page).to have_text("11 000 - 18 000")
     expect(page).to have_text("B2B")
     expect(page).to have_xpath("//img[contains(@src,'logo.png')]")
   end

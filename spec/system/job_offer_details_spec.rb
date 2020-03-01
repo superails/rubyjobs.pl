@@ -4,6 +4,11 @@ RSpec.describe "Job offer details", :type => :system do
   let(:admin) { create(:user, admin: true) }
 
   it 'shows job_offer details' do
+    visit "/users/sign_in"
+    fill_in :user_email, with: admin.email
+    fill_in :user_password, with: admin.password
+    click_button "Zaloguj się" 
+
     visit "/"
     click_link "Dodaj ogłoszenie"
 
@@ -22,13 +27,6 @@ RSpec.describe "Job offer details", :type => :system do
     click_button "Dalej"
     click_link "Dalej"
     click_link "Wyślij"
-
-    visit "/users/sign_in"
-    fill_in :user_email, with: admin.email
-    fill_in :user_password, with: admin.password
-    click_button "Zaloguj się" 
-
-    click_link "Accept"
 
     visit "/"
     click_link "Ruby on Rails Developer"
