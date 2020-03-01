@@ -6,12 +6,7 @@ class FacetedSearchBuilder
   end
 
   def call
-    all_facets = Facet.select('facets.*, COUNT(facets.id) AS job_offers_count')
-      .joins(:job_offers)
-      .where(job_offers: {state: 'published'})
-      .group('facets.id')
-      .includes(:category)
-      .order('job_offers_count DESC, facets.name')
+    all_facets = Facet.select('facets.*, COUNT(facets.id) AS job_offers_count').joins(:job_offers).where(job_offers: {state: 'published'}).group('facets.id').includes(:category).order('job_offers_count DESC, facets.name')
 
     default_search = all_facets.group_by(&:category).sort_by{|category, _| category.rank}.to_h
 
