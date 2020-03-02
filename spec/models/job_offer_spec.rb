@@ -170,5 +170,14 @@ RSpec.describe JobOffer, type: :model do
 
       expect(job_offer.locations.map(&:name)).to eq ["Warszawa"]
     end
+
+    it 'removes current locations' do
+      job_offer = JobOffer.new
+
+      job_offer.city_names = "Warszawa, Białystok"
+      job_offer.city_names = "Białystok, Olsztyn"
+
+      expect(job_offer.locations.map(&:name)).to match_array ["Białystok", "Olsztyn"]
+    end
   end
 end

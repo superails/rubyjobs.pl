@@ -58,7 +58,7 @@ class JobOffer < ApplicationRecord
     end
 
     self.locations = (
-      locations + location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
+      locations.select{|location| location.name == 'Zdalnie'} + location_params.map{|location_params| Location.find_or_initialize_by(location_params)}
     ).uniq(&:name)
   end
 
