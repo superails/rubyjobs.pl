@@ -1,6 +1,6 @@
 <%= link_to job_offer do %>
   <div class="bg-white border border-gray-200 flex px-6 py-5 mb-6">
-    <div class="w-20 h-20 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-6 self-center flex items-center">
+    <div class="w-20 h-20 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-6 self-center flex items-center justify-center">
       <% if job_offer.logo.attached? %>
         <%= image_tag(job_offer.logo, class: "max-w-full max-h-full block") %>
       <% elsif job_offer.company.logo.attached? %>
