@@ -27,9 +27,9 @@ RSpec.describe FacetedSearchBuilder, type: :model do
 
       expect(search.keys).to eq %w(location experience js-framework programming-language devops)
 
-      expect(search.values.map{|facets| facets.map{|facet| [facet.name, facet.slug, facet.job_offers_count]}}).to eq [
-        ['Białystok', 'bialystok', 1],
+      expect(search.values.flatten.map{|facet| [facet.name, facet.slug, facet.job_offers_count]}).to eq [
         ['Warszawa', 'warszawa', 1],
+        ['Białystok', 'bialystok', 1],
         ['Junior', 'junior', 1],
         ['Mid', 'mid', 0],
         ['VueJS', 'vuejs', 1],
