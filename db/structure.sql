@@ -686,13 +686,6 @@ CREATE INDEX index_facets_on_facet_category_id ON public.facets USING btree (fac
 
 
 --
--- Name: index_facettings_on_facet_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_facettings_on_facet_id ON public.facettings USING btree (facet_id);
-
-
---
 -- Name: index_facettings_on_facetable_type_and_facetable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -831,6 +824,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200216092604'),
 ('20200310222453'),
 ('20200310230141'),
-('20200312230849');
+('20200312230849'),
+('20200312233944');
 
 
