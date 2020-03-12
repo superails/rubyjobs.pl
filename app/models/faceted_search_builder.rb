@@ -63,7 +63,7 @@ class FacetedSearchBuilder
         ORDER BY 
           category_rank DESC,
           job_offers_count DESC,
-          slug DESC
+          slug ASC
       SQL
     else
       search_categories = 
@@ -124,7 +124,7 @@ class FacetedSearchBuilder
           #{search_query}
         ) AS search_facets
         GROUP BY slug, name, category_slug, category_rank
-        ORDER BY category_rank DESC, facet_rank DESC, slug DESC
+        ORDER BY category_rank DESC, facet_rank DESC, slug ASC
       SQL
     end
 
