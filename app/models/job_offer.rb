@@ -6,7 +6,7 @@ class JobOffer < ApplicationRecord
   belongs_to :company
   has_many :sites, dependent: :destroy 
   has_many :locations, through: :sites
-  has_many :facettings
+  has_many :facettings, as: :facetable
   has_many :facets, through: :facettings
 
   scope :active, -> { where("state != 'created' AND state != 'closed'") }

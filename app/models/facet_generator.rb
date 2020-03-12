@@ -18,7 +18,7 @@ class FacetGenerator
       location_category = FacetCategory.find_or_create_by(
         name: 'Lokalizacja',
         slug: 'location',
-        rank: 10
+        rank: 50
       )
 
       job_offer.facets << Facet.find_or_create_by(
@@ -33,7 +33,7 @@ class FacetGenerator
     experience_category = FacetCategory.find_or_create_by(
       name: 'Doświadczenie',
       slug: 'experience',
-      rank: 20
+      rank: 40
     )
 
     if job_offer.title =~ /junior|młodszy/i

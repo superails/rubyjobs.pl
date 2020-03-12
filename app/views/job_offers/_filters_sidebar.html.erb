@@ -12,9 +12,9 @@
         %>
   </div>
 
-  <% @filters.each do |category, facets| %>
-    <p class="font-header text-lg font-medium mb-3"><%= category.name %></p>
-    <div class="category" id="<%= "#{category.slug}"%>">
+  <% @filters.each do |category_slug, facets| %>
+    <p class="font-header text-lg font-medium mb-3"><%= I18n.t("facets.categories.#{category_slug}") %></p>
+    <div class="category" id="<%= "#{category_slug}"%>">
       <% facets.each do |facet| %>
         <div class="flex justify-between mb-3 <%= "text-gray-400" if facet.job_offers_count == 0 %>">
           <label class="inline-flex items-center">

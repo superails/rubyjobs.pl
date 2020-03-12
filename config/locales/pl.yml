@@ -170,6 +170,13 @@ pl:
         few: "%{model} nie został zachowany z powodu %{count} błędów"
         many: "%{model} nie został zachowany z powodu %{count} błędów"
         other: "%{model} nie został zachowany z powodu %{count} błędów"
+  facets:
+    categories:
+      experience: Doświadczenie
+      location: Lokalizacja
+      js-framework: Framework JS
+      devops: Technologie DevOps
+      programming-language: Języki programowania
   helpers:
     select:
       prompt: Proszę wybrać

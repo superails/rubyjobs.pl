@@ -206,10 +206,11 @@ ALTER SEQUENCE public.facets_id_seq OWNED BY public.facets.id;
 
 CREATE TABLE public.facettings (
     id bigint NOT NULL,
-    job_offer_id bigint,
     facet_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    facetable_type character varying,
+    facetable_id bigint
 );
 
 
@@ -642,10 +643,10 @@ CREATE INDEX index_facettings_on_facet_id ON public.facettings USING btree (face
 
 
 --
--- Name: index_facettings_on_job_offer_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_facettings_on_facetable_type_and_facetable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_facettings_on_job_offer_id ON public.facettings USING btree (job_offer_id);
+CREATE INDEX index_facettings_on_facetable_type_and_facetable_id ON public.facettings USING btree (facetable_type, facetable_id);
 
 
 --
@@ -688,14 +689,6 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
-
-
---
--- Name: facettings fk_rails_1bd75fd161; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.facettings
-    ADD CONSTRAINT fk_rails_1bd75fd161 FOREIGN KEY (job_offer_id) REFERENCES public.job_offers(id);
 
 
 --
@@ -778,6 +771,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200125110446'),
 ('20200216092341'),
 ('20200216092410'),
-('20200216092604');
+('20200216092604'),
+('20200310222453'),
+('20200310230141');
 
 
