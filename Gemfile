@@ -24,6 +24,9 @@ gem 'data_migrate'
 gem 'aasm'
 gem 'rest-client'
 
+gem 'redis'
+gem 'hiredis'
+
 gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
 gem 'marginalia'

@@ -6,10 +6,16 @@ class FacetedSearchBuilder
   end
 
   def call
-    Facet.find_by_sql(query).group_by(&:category_slug)
+    Rails.cache.fetch("faceted_search/#{cache_key}") do 
+      Facet.find_by_sql(query).group_by(&:category_slug)
+    end
   end
 
   private
+  
+  def cache_key
+    Digest::SHA256.hexdigest search_params.to_s
+  end
 
   def query
     query = <<-SQL
