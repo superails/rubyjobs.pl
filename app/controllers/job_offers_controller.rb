@@ -2,24 +2,8 @@ class JobOffersController < ApplicationController
   helper_method :facet_slug_active?
 
   def index
-    @job_offers = JobOffer.with_attached_logo
     @filters = FacetedSearchBuilder.new(search_params).call
-
-    if search_params.present?
-      @job_offers = @job_offers
-        .joins(facets: :category)
-        .where(facets: {slug: search_params.values.flatten})
-        .group('job_offers.id')
-        .having('COUNT(DISTINCT facet_categories.id) = ?', search_params.keys.length)
-    end
-
-    @job_offers = 
-      if current_user.admin?
-        @job_offers.active.order('published_at DESC, submitted_at DESC')
-      else
-        @job_offers.published.order('published_at DESC').includes(:locations, :company)
-      end
-
+    @job_offers = JobOffersFinder.new(search_params, current_user).call
 
     @job_offers = @job_offers.decorate
   end
@@ -72,4 +56,5 @@ class JobOffersController < ApplicationController
   def job_offer_params
     params.require(:job_offer).permit(:title, :city_names, :remote, :salary, :salary_type, :description, :apply_link, :logo, :email, company_attributes: [:name])
   end
+
 end
