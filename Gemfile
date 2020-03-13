@@ -26,6 +26,7 @@ gem 'rest-client'
 
 gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
+gem 'marginalia'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
