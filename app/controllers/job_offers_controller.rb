@@ -22,7 +22,9 @@ class JobOffersController < ApplicationController
   end
 
   def create
-    if @job_offer = JobOfferCreator.new(job_offer_params).call
+    @job_offer = JobOfferCreator.new(job_offer_params).call
+
+    if @job_offer.valid?
       redirect_to job_offers_preview_path(@job_offer.token)
     else
       render :new
