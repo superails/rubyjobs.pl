@@ -55,6 +55,7 @@ class JobOffer < ApplicationRecord
       indexes :location, type: :keyword
       indexes :experience, type: :keyword
       indexes :state, type: :keyword
+      indexes :published_at, type: :date
     end
   end
 
@@ -62,7 +63,8 @@ class JobOffer < ApplicationRecord
     {
       "location" => location_slugs,
       "experience" => experience,
-      "state" => state
+      "state" => state,
+      "published_at" => published_at
     }
   end
 

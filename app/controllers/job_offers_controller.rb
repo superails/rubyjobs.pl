@@ -20,10 +20,13 @@ class JobOffersController < ApplicationController
               }
             }
           }
+        },
+        sort: {
+          "published_at": "desc"
         }
       ).records
     else
-      @job_offers = JobOffer.published
+      @job_offers = JobOffer.published.order('published_at DESC')
     end
 
     @job_offers = @job_offers.decorate
