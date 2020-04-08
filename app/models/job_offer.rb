@@ -1,5 +1,7 @@
 class JobOffer < ApplicationRecord
   include AASM
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   DEFAULT_REFRESH_TIME = 30.days
 
@@ -46,6 +48,36 @@ class JobOffer < ApplicationRecord
     event :refresh do
       transitions from: :published, to: :published, success: -> { JobOfferRefresher.new(self).call }
     end
+  end
+
+  settings do 
+    mappings dynamic: false do
+      indexes :location, type: :keyword
+      indexes :experience, type: :keyword
+      indexes :state, type: :keyword
+    end
+  end
+
+  def as_indexed_json(options = {})
+    {
+      "location" => location_slugs,
+      "experience" => experience,
+      "state" => state
+    }
+  end
+
+  def location_slugs
+    locations.pluck(:name).map{|name| name == 'Zdalnie' ? 'remote' : name.parameterize}
+  end
+
+  def experience
+    exp = []
+
+    exp << 'junior' if title =~ /junior|młodszy/i
+    exp << 'senior' if title =~ /senior|starszy|lead|cto/i
+    exp << 'mid' if title =~ /Mid/i || exp.empty?
+
+    exp
   end
 
   def city_names

@@ -3,7 +3,28 @@ class JobOffersController < ApplicationController
 
   def index
     @filters = FacetedSearchBuilder.new(search_params).call
-    @job_offers = JobOffersFinder.new(search_params, current_user).call
+
+    if search_params.present?
+      @job_offers = JobOffer.search(
+        query: {
+          bool: {
+            must: search_params.to_h.map do |facet_name, facet_values|
+              {
+                terms: {
+                  facet_name => facet_values
+                }
+              }
+            end << {
+              terms: {
+                state: current_user.admin? ? ['published', 'submitted'] : ['published']
+              }
+            }
+          }
+        }
+      ).records
+    else
+      @job_offers = JobOffer.published
+    end
 
     @job_offers = @job_offers.decorate
   end
