@@ -5,13 +5,18 @@ class JobOffersController < ApplicationController
     @filters = FacetedSearchBuilder.new(search_params).call
 
     if search_params.present?
-      @job_offers = JobOffer.search(
+      response = JobOffer.search(
         query: {
           bool: {
             must: search_params.to_h.map do |facet_name, facet_values|
               {
-                terms: {
-                  facet_name => facet_values
+                nested: {
+                  path: facet_name,
+                  query: {
+                    terms: {
+                      "#{facet_name}.slug" => facet_values
+                    }
+                  }
                 }
               }
             end << {
@@ -24,7 +29,8 @@ class JobOffersController < ApplicationController
         sort: {
           "published_at": "desc"
         }
-      ).records
+      )
+      @job_offers = response.records
     else
       @job_offers = JobOffer.published.order('published_at DESC')
     end

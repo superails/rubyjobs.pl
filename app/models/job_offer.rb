@@ -52,8 +52,16 @@ class JobOffer < ApplicationRecord
 
   settings do 
     mappings dynamic: false do
-      indexes :location, type: :keyword
-      indexes :experience, type: :keyword
+      indexes :location, type: :nested do
+        indexes :slug, type: :keyword
+        indexes :name, type: :keyword
+      end
+
+      indexes :experience, type: :nested do
+        indexes :slug, type: :keyword
+        indexes :name, type: :keyword
+      end
+
       indexes :state, type: :keyword
       indexes :published_at, type: :date
     end
@@ -69,15 +77,21 @@ class JobOffer < ApplicationRecord
   end
 
   def location_slugs
-    locations.pluck(:name).map{|name| name == 'Zdalnie' ? 'remote' : name.parameterize}
+    locations.pluck(:name).map do |name| 
+      slug = name == 'Zdalnie' ? 'remote' : name.parameterize
+      {
+        slug: slug,
+        name: name
+      }
+    end
   end
 
   def experience
     exp = []
 
-    exp << 'junior' if title =~ /junior|młodszy/i
-    exp << 'senior' if title =~ /senior|starszy|lead|cto/i
-    exp << 'mid' if title =~ /Mid/i || exp.empty?
+    exp << {slug: 'junior', name: 'Junior'} if title =~ /junior|młodszy/i
+    exp << {slug: 'senior', name: 'Senior'} if title =~ /senior|starszy|lead|cto/i
+    exp << {slug: 'mid', name: 'Mid'} if title =~ /Mid/i || exp.empty?
 
     exp
   end
