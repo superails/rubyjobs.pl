@@ -4,6 +4,7 @@ class JobOffer < ApplicationRecord
   include Elasticsearch::Model::Callbacks
 
   DEFAULT_REFRESH_TIME = 30.days
+  FACET_SLUGS = %w(location experience)
 
   belongs_to :company
   has_many :sites, dependent: :destroy 

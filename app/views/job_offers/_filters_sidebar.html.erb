@@ -16,17 +16,17 @@
     <p class="font-header text-lg font-medium mb-3"><%= I18n.t("facets.categories.#{category_slug}") %></p>
     <div class="category" id="<%= "#{category_slug}"%>">
       <% facets.each do |facet| %>
-        <div class="flex justify-between mb-3 <%= "text-gray-400" if facet.job_offers_count == 0 %>">
+        <div class="flex justify-between mb-3 <%= "text-gray-400" if facet[:job_offers_count] == 0 %>">
           <label class="inline-flex items-center">
             <input type="checkbox" 
-                   value="<%= facet.slug %>" 
-                   <%= "checked" if facet_slug_active?(facet.slug) %> 
+                   value="<%= facet[:slug] %>" 
+                   <%= "checked" if facet_slug_active?(facet[:slug]) %> 
                    class="form-checkbox rounded-none w-5 h-5" 
-                   <%= "disabled" if facet.job_offers_count == 0 %>
+                   <%= "disabled" if facet[:job_offers_count] == 0 %>
                    data-action="change->filters#update">
-                   <span class="ml-3"><%= facet.name %></span>
+                   <span class="ml-3"><%= facet[:name] %></span>
           </label>
-          <span><%= facet.job_offers_count %></span>
+          <span><%= facet[:job_offers_count] %></span>
         </div>
       <% end %>
     </div>
