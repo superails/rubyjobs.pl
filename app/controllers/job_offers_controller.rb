@@ -2,58 +2,68 @@ class JobOffersController < ApplicationController
   helper_method :facet_slug_active?
 
   def index
-      response = JobOffer.search(
-        query: {
-          bool: {
-            must: search_params.to_h.map do |facet_name, facet_values|
-              {
-                nested: {
-                  path: facet_name,
-                  query: {
-                    terms: {
-                      "#{facet_name}.slug" => facet_values
-                    }
+    response = JobOffer.search(
+      query: {
+        bool: {
+          must: search_params.to_h.map do |facet_name, facet_values|
+            {
+              nested: {
+                path: facet_name,
+                query: {
+                  terms: {
+                    "#{facet_name}.slug" => facet_values
                   }
                 }
               }
-            end << {
-              terms: {
-                state: current_user.admin? ? ['published', 'submitted'] : ['published']
-              }
+            }
+          end << {
+            terms: {
+              state: current_user.admin? ? ['published', 'submitted'] : ['published']
             }
           }
-        },
-        sort: {
-          "published_at": "desc"
-        },
-        aggs: {
-          all_job_offers: {
-            global: {},
-            aggs: JobOffer::FACET_SLUGS.map do |facet_name|
-              [
-                facet_name, 
-                {
-                  nested: {
-                    path: facet_name
-                  },
-                  aggs: {
-                    slug: {
-                      terms: {
-                        field: "#{facet_name}.slug",
-                        order: [{_count: "desc"}, {_key: "asc"}]
-                      },
-                      aggs: {
-                        name: {
-                          terms: {
-                            field: "#{facet_name}.name"
+        }
+      },
+      sort: {
+        "published_at": "desc"
+      },
+      aggs: {
+        all_job_offers: {
+          global: {},
+          aggs: JobOffer::FACET_SLUGS.map do |facet_name|
+            [
+              facet_name, 
+              {
+                filter: {
+                  terms: {
+                    state: current_user.admin? ? ['published', 'submitted'] : ['published']
+                  }
+                },
+                aggs: {
+                  facet_name => {
+
+                    nested: {
+                      path: facet_name
+                    },
+                    aggs: {
+                      slug: {
+                        terms: {
+                          field: "#{facet_name}.slug",
+                          order: [{_count: "desc"}, {_key: "asc"}]
+                        },
+                        aggs: {
+                          name: {
+                            terms: {
+                              field: "#{facet_name}.name"
+                            }
                           }
                         }
                       }
                     }
                   }
                 }
-              ]
-            end.to_h
+              }
+            ]
+          end.to_h
           },
           filtered_job_offers: {
             global: {},
@@ -74,7 +84,11 @@ class JobOffersController < ApplicationController
                             }
                           }
                         }
-                      end
+                      end << {
+                        terms: {
+                          state: current_user.admin? ? ['published', 'submitted'] : ['published']
+                        }
+                      }
                     }
                   },
                   aggs: {
@@ -99,7 +113,8 @@ class JobOffersController < ApplicationController
         }
       )
 
-      @filters = response.response.aggregations.all_job_offers.slice(*JobOffer::FACET_SLUGS).map do |k,v| 
+
+      @filters = response.response.aggregations.all_job_offers.slice(*JobOffer::FACET_SLUGS).map{|k,v| v}.map(&:to_a).flatten(1).to_h.slice(*JobOffer::FACET_SLUGS).map do |k,v| 
         [
           k, 
           v.slug.buckets.map do |bucket| 
